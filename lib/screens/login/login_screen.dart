@@ -80,7 +80,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 1,
                 child: Column(
                   children: [
                     // nút đăng nhập

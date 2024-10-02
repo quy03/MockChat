@@ -6,13 +6,15 @@ class MessageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              // height: double.infinity,
+              padding: EdgeInsets.symmetric(
+                horizontal: size.width / 30,
+              ),
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -26,7 +28,7 @@ class MessageScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const SizedBox(height: 54),
+                  SizedBox(height: size.height / 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -59,32 +61,95 @@ class MessageScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
-                      // Cấp chiều cao cho TextField
                       contentPadding: const EdgeInsets.symmetric(vertical: 0),
                     ),
                   ),
                 ],
               ),
             ),
-            // Container dưới chiếm hết phần còn lại và sát đáy
             Positioned(
-              top: 200, // Vị trí bắt đầu ngay dưới container trên
+              top: size.height / 5,
               left: 0,
               right: 0,
-              bottom: 0, // Sát với đáy màn hình
+              bottom: 0,
               child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
-                  child: const Column()),
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width / 30,
+                    vertical: size.height / 30,
+                  ),
+                  child: Column(
+                    children: [
+                      MyListTitle(size: size),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class MyListTitle extends StatelessWidget {
+  const MyListTitle({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            const CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage("assets/images/random4.png"),
+            ),
+            SizedBox(width: size.width / 20),
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Trịnh Bảo Quý",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    "Phùng Như Ý",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(
+              thickness: 1, // Độ dày của đường kẻ
+              color: Colors.grey, // Màu sắc của đường kẻ
+            ),
+            const Text("18:00"),
+          ],
+        ),
+        const SizedBox(height: 8), // Khoảng cách giữa Row và Container
+        Container(
+          height: 1, // Chiều cao của đường kẻ
+          color: Colors.grey, // Màu của đường kẻ
+        ),
+      ],
     );
   }
 }

@@ -22,62 +22,59 @@ class RegisterScreen extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child: SingleChildScrollView(
-                  // Bọc phần này trong SingleChildScrollView
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: size.height / 20),
-                      GestureDetector(
-                        onTap: press,
-                        child: SvgPicture.asset(
-                          "assets/icons/backward-arrow.svg",
-                          height: 24,
-                          width: 24,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: size.height / 20),
+                    GestureDetector(
+                      onTap: press,
+                      child: SvgPicture.asset(
+                        "assets/icons/backward-arrow.svg",
+                        height: 24,
+                        width: 24,
                       ),
-                      SizedBox(height: size.height / 20),
-                      // text đăng ký
-                      Text(
-                        "Đăng ký",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    ),
+                    SizedBox(height: size.height / 20),
+                    // text đăng ký
+                    Text(
+                      "Đăng ký",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: size.height / 20),
-                      // fullname textfield
-                      const MyTextField(
-                        svgIcon: 'assets/icons/user.svg',
-                        labelText: 'HỌ VÀ TÊN',
-                        hintText: 'Nhập họ và tên của bạn',
-                        obscureText: false,
-                      ),
-                      SizedBox(height: size.height / 30),
+                    ),
+                    SizedBox(height: size.height / 20),
+                    // fullname textfield
+                    const MyTextField(
+                      svgIcon: 'assets/icons/user.svg',
+                      labelText: 'HỌ VÀ TÊN',
+                      hintText: 'Nhập họ và tên của bạn',
+                      obscureText: false,
+                    ),
+                    SizedBox(height: size.height / 30),
 
-                      // email textfield
-                      const MyTextField(
-                        svgIcon: 'assets/icons/mail.svg',
-                        labelText: 'EMAIL',
-                        hintText: 'Nhập email của bạn',
-                        obscureText: false,
-                      ),
-                      SizedBox(height: size.height / 30),
+                    // email textfield
+                    const MyTextField(
+                      svgIcon: 'assets/icons/mail.svg',
+                      labelText: 'EMAIL',
+                      hintText: 'Nhập email của bạn',
+                      obscureText: false,
+                    ),
+                    SizedBox(height: size.height / 30),
 
-                      // password textfield
-                      const MyTextField(
-                        svgIcon: 'assets/icons/key.svg',
-                        labelText: 'MẬT KHẨU',
-                        hintText: 'Nhập mật khẩu của bạn',
-                        obscureText: true,
-                      ),
-                      SizedBox(height: size.height / 30),
+                    // password textfield
+                    const MyTextField(
+                      svgIcon: 'assets/icons/key.svg',
+                      labelText: 'MẬT KHẨU',
+                      hintText: 'Nhập mật khẩu của bạn',
+                      obscureText: true,
+                    ),
+                    SizedBox(height: size.height / 30),
 
-                      // Checkbox đồng ý chính sách
-                      const ButtonCheckbox(),
-                    ],
-                  ),
+                    // Checkbox đồng ý chính sách
+                    const ButtonCheckbox(),
+                  ],
                 ),
               ),
               Expanded(
