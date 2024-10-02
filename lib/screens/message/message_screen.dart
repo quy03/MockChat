@@ -12,7 +12,7 @@ class MessageScreen extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              height: double.infinity,
+              // height: double.infinity,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,

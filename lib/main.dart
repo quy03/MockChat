@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mock_chat/auth/login_or_register.dart';
 import 'package:mock_chat/screens/login/login_screen.dart';
 import 'package:mock_chat/screens/message/message_screen.dart';
 import 'package:mock_chat/screens/register/register_screen.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme,
-      home: const MessageScreen(),
+      home: const LoginOrRegister(),
       routes: {
         '/login_screen': (context) => const LoginScreen(),
         '/register_screen': (context) => const RegisterScreen(),
