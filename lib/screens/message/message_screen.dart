@@ -83,10 +83,11 @@ class MessageScreen extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: size.width / 30,
-                    vertical: size.height / 30,
+                    vertical: size.height / 50,
                   ),
                   child: Column(
                     children: [
+                      MyListTitle(size: size),
                       MyListTitle(size: size),
                     ],
                   ),
@@ -112,11 +113,14 @@ class MyListTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: size.height / 50),
         Row(
           children: [
             const CircleAvatar(
               radius: 30,
-              backgroundImage: AssetImage("assets/images/random4.png"),
+              backgroundImage: AssetImage(
+                "assets/images/random4.png",
+              ),
             ),
             SizedBox(width: size.width / 20),
             const Expanded(
@@ -132,7 +136,11 @@ class MyListTitle extends StatelessWidget {
                   ),
                   Text(
                     "Phùng Như Ý",
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(
+                      color: Colors.grey,
+                      // 0,0,0,1       153,153,153,1
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
@@ -144,11 +152,12 @@ class MyListTitle extends StatelessWidget {
             const Text("18:00"),
           ],
         ),
-        const SizedBox(height: 8), // Khoảng cách giữa Row và Container
+        SizedBox(height: size.height / 50),
         Container(
-          height: 1, // Chiều cao của đường kẻ
-          color: Colors.grey, // Màu của đường kẻ
-        ),
+          margin: EdgeInsets.only(left: size.width / 5, right: 0),
+          height: 1,
+          color: Colors.grey,
+        )
       ],
     );
   }
