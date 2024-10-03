@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mock_chat/auth/login_or_register.dart';
-import 'package:mock_chat/screens/login/login_screen.dart';
+import 'package:mock_chat/screens/login_screen.dart';
 import 'package:mock_chat/screens/message/message_screen.dart';
-import 'package:mock_chat/screens/register/register_screen.dart';
+import 'package:mock_chat/screens/register_screen.dart';
 import 'package:mock_chat/theme/theme.dart';
 import 'firebase_options.dart';
 
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login_screen': (context) => const LoginScreen(),
         '/register_screen': (context) => const RegisterScreen(),
+        '/message_screen': (context) => const MessageScreen(),
       },
     );
   }

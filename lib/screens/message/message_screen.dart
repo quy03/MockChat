@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/screens/message/components/head_massage.dart';
 
 class MessageScreen extends StatelessWidget {
   const MessageScreen({super.key});
@@ -11,62 +11,7 @@ class MessageScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: size.width / 30,
-              ),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF4356B4),
-                    Color(0xFF3DCFCF),
-                  ],
-                  stops: [0.1, 0.4],
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: size.height / 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Tin nhắn',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, 1),
-                          fontSize: 30,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: SvgPicture.asset(
-                          "assets/icons/create new message.svg",
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color.fromRGBO(255, 255, 255, 1),
-                      hintText: 'Tìm kiếm tin nhắn...',
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: Color.fromRGBO(67, 86, 180, 1),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            HeadMassages(size: size),
             Positioned(
               top: size.height / 5,
               left: 0,

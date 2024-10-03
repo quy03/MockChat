@@ -8,9 +8,11 @@ class MyTextField extends StatelessWidget {
     required this.labelText,
     required this.hintText,
     required this.obscureText,
+    required this.controller,
   });
   final String svgIcon, labelText, hintText;
   final bool obscureText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class MyTextField extends StatelessWidget {
         suffixIcon: CustomSuffixIcon(svgIcon: svgIcon),
       ),
       obscureText: obscureText,
+      controller: controller,
     );
   }
 }
