@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mock_chat/screens/message/components/head_massage.dart';
+import 'package:mock_chat/screens/message/components/my_list_title.dart';
+import 'package:mock_chat/screens/message/components/search_mesage.dart';
 
-class MessageScreen extends StatelessWidget {
+import '../../models/massage.dart';
+
+class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
+
+  @override
+  State<MessageScreen> createState() => _MessageScreenState();
+}
+
+class _MessageScreenState extends State<MessageScreen> {
+  final bool _isSearching = true;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +22,9 @@ class MessageScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            HeadMassages(size: size),
+            HeadMassages(
+              size: size,
+            ),
             Positioned(
               top: size.height / 5,
               left: 0,
@@ -28,14 +41,10 @@ class MessageScreen extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: size.width / 30,
-                    vertical: size.height / 50,
                   ),
-                  child: Column(
-                    children: [
-                      MyListTitle(size: size),
-                      MyListTitle(size: size),
-                    ],
-                  ),
+                  child: _isSearching
+                      ? _buildSearchResults(size)
+                      : _buildMessageList(size),
                 ),
               ),
             ),
@@ -44,65 +53,59 @@ class MessageScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class MyListTitle extends StatelessWidget {
-  const MyListTitle({
-    super.key,
-    required this.size,
-  });
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
+  // hiển thị danh sách tìm kiếm
+  Column _buildSearchResults(Size size) {
     return Column(
       children: [
         SizedBox(height: size.height / 50),
-        Row(
-          children: [
-            const CircleAvatar(
-              radius: 30,
-              backgroundImage: AssetImage(
-                "assets/images/random4.png",
-              ),
+        Expanded(
+          child: ListView.separated(
+            itemCount: demoMassage.length,
+            separatorBuilder: (BuildContext context, int index) => Container(
+              margin: EdgeInsets.only(left: size.width / 5),
+              height: 1,
+              color: Colors.grey,
             ),
-            SizedBox(width: size.width / 20),
-            const Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Trịnh Bảo Quý",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    "Phùng Như Ý",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      // 0,0,0,1       153,153,153,1
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              thickness: 1, // Độ dày của đường kẻ
-              color: Colors.grey, // Màu sắc của đường kẻ
-            ),
-            const Text("18:00"),
-          ],
+            itemBuilder: (BuildContext context, int index) {
+              final message = demoMassage[index];
+              return SearchMessage(
+                size: size,
+                image: message.image,
+                friendName: message.friendName,
+              );
+            },
+          ),
         ),
+      ],
+    );
+  }
+
+  //  Hiển thị danh sách tin nhắn
+  Column _buildMessageList(Size size) {
+    return Column(
+      children: [
         SizedBox(height: size.height / 50),
-        Container(
-          margin: EdgeInsets.only(left: size.width / 5, right: 0),
-          height: 1,
-          color: Colors.grey,
-        )
+        Expanded(
+          child: ListView.separated(
+            itemCount: demoMassage.length,
+            separatorBuilder: (BuildContext context, int index) => Container(
+              margin: EdgeInsets.only(left: size.width / 5),
+              height: 1,
+              color: Colors.grey,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              final message = demoMassage[index];
+              return MyListTitle(
+                size: size,
+                image: message.image,
+                friendName: message.friendName,
+                messageContent: message.messageContent.last,
+                time: message.time,
+              );
+            },
+          ),
+        ),
       ],
     );
   }

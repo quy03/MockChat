@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mock_chat/components/my_search.dart';
+
+import '../../../components/my_search.dart';
 
 class HeadMassages extends StatelessWidget {
   const HeadMassages({
@@ -13,6 +14,7 @@ class HeadMassages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: size.height,
       padding: EdgeInsets.symmetric(
         horizontal: size.width / 30,
       ),
@@ -41,7 +43,7 @@ class HeadMassages extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () => {},
                 child: SvgPicture.asset(
                   "assets/icons/create new message.svg",
                 ),
@@ -49,8 +51,10 @@ class HeadMassages extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const MySearch(
-            hintText: 'Tìm kiếm tin nhắn',
+          GestureDetector(
+            child: const MySearch(
+              hintText: 'Tìm kiếm tin nhắn...',
+            ),
           ),
         ],
       ),
