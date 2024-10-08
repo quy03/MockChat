@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class SearchMessage extends StatelessWidget {
-  const SearchMessage({
+class MessageList extends StatelessWidget {
+  const MessageList({
     super.key,
     required this.size,
     required this.image,
     required this.friendName,
+    required this.time,
+    required this.messageContent,
   });
 
   final Size size;
   final String image, friendName;
+  final DateTime time;
+  final String messageContent;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +25,14 @@ class SearchMessage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 30,
-              backgroundImage: AssetImage(
-                image,
+              backgroundColor: Colors.transparent,
+              child: ClipOval(
+                child: Image.asset(
+                  image,
+                  fit: BoxFit.cover,
+                  width: 58,
+                  height: 58,
+                ),
               ),
             ),
             SizedBox(width: size.width / 20),
@@ -36,9 +47,9 @@ class SearchMessage extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  const Text(
-                    "tin nhắn phù hợp",
-                    style: TextStyle(
+                  Text(
+                    messageContent,
+                    style: const TextStyle(
                       color: Colors.grey,
                       // 0,0,0,1       153,153,153,1
                       fontSize: 14,
@@ -47,6 +58,7 @@ class SearchMessage extends StatelessWidget {
                 ],
               ),
             ),
+            Text(DateFormat('HH:mm').format(time)),
           ],
         ),
         SizedBox(height: size.height / 100),

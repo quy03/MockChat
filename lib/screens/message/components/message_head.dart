@@ -3,13 +3,15 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../components/my_search.dart';
 
-class HeadMassages extends StatelessWidget {
-  const HeadMassages({
+class MessageHead extends StatelessWidget {
+  const MessageHead({
     super.key,
     required this.size,
+    required this.onSearchToggle,
   });
 
   final Size size;
+  final ValueChanged<bool> onSearchToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +54,10 @@ class HeadMassages extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           GestureDetector(
-            child: const MySearch(
+            onTap: () => {},
+            child: MySearch(
               hintText: 'Tìm kiếm tin nhắn...',
+              onSearchToggle: onSearchToggle,
             ),
           ),
         ],

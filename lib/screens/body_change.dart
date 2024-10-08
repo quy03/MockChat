@@ -59,6 +59,7 @@ class _BodyChangeState extends State<BodyChange> {
           child: CustomBottomNavBar(
             selectedMenu: MenuState.values[_selectedIndex],
             onItemTapped: _onItemTappped,
+            messageBadgeCount: 3,
           ),
         ),
       ),

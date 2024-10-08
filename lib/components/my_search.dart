@@ -1,11 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class MySearch extends StatefulWidget {
   const MySearch({
-    super.key,
+    Key? key,
     required this.hintText,
-  });
+    required this.onSearchToggle,
+  }) : super(key: key);
+
   final String hintText;
+  final ValueChanged<bool> onSearchToggle;
 
   @override
   State<MySearch> createState() => _MySearchState();
@@ -13,7 +17,6 @@ class MySearch extends StatefulWidget {
 
 class _MySearchState extends State<MySearch> {
   bool _isSearching = false;
-
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -23,13 +26,12 @@ class _MySearchState extends State<MySearch> {
       children: [
         Expanded(
           child: AnimatedContainer(
-            duration: const Duration(microseconds: 300),
+            duration: const Duration(milliseconds: 300),
             width: _isSearching ? size.width * 0.7 : size.width,
             child: TextField(
               onTap: () {
-                setState(() {
-                  _isSearching = true;
-                });
+                _isSearching = true;
+                widget.onSearchToggle(true);
               },
               controller: searchController,
               decoration: InputDecoration(
@@ -52,10 +54,9 @@ class _MySearchState extends State<MySearch> {
         if (_isSearching)
           TextButton(
             onPressed: () {
-              setState(() {
-                _isSearching = false;
-                searchController.clear();
-              });
+              _isSearching = false;
+              widget.onSearchToggle(false);
+              searchController.clear();
               FocusScope.of(context).unfocus();
             },
             child: Text(

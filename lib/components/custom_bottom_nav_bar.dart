@@ -8,13 +8,14 @@ class CustomBottomNavBar extends StatelessWidget {
     super.key,
     required this.selectedMenu,
     required this.onItemTapped,
+    required this.messageBadgeCount,
   });
   final MenuState selectedMenu;
   final Function(int) onItemTapped;
+  final int messageBadgeCount;
 
   @override
   Widget build(BuildContext context) {
-    int messageBadgeCount = 3;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [

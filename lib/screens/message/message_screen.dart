@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mock_chat/screens/message/components/head_massage.dart';
-import 'package:mock_chat/screens/message/components/my_list_title.dart';
-import 'package:mock_chat/screens/message/components/search_mesage.dart';
+import 'package:mock_chat/screens/message/components/message_details.dart';
+import 'package:mock_chat/screens/message/components/message_head.dart';
+import 'package:mock_chat/screens/message/components/message_list.dart';
+import 'package:mock_chat/screens/message/components/mesage_search.dart';
 
 import '../../models/massage.dart';
 
@@ -13,17 +14,26 @@ class MessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends State<MessageScreen> {
-  final bool _isSearching = true;
+  bool _isSearching = false;
+
+  // Hàm để chuyển đổi trạng thái tìm kiếm
+  void _toggleSearch(bool value) {
+    setState(() {
+      _isSearching = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
-            HeadMassages(
+            MessageHead(
               size: size,
+              onSearchToggle: _toggleSearch,
             ),
             Positioned(
               top: size.height / 5,
@@ -43,7 +53,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     horizontal: size.width / 30,
                   ),
                   child: _isSearching
-                      ? _buildSearchResults(size)
+                      ? _buildMessageSearch(size)
                       : _buildMessageList(size),
                 ),
               ),
@@ -55,10 +65,18 @@ class _MessageScreenState extends State<MessageScreen> {
   }
 
   // hiển thị danh sách tìm kiếm
-  Column _buildSearchResults(Size size) {
+  Column _buildMessageSearch(Size size) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: size.height / 50),
+        Text(
+          "TIN NHẮN",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontSize: 14,
+          ),
+        ),
         Expanded(
           child: ListView.separated(
             itemCount: demoMassage.length,
@@ -69,7 +87,7 @@ class _MessageScreenState extends State<MessageScreen> {
             ),
             itemBuilder: (BuildContext context, int index) {
               final message = demoMassage[index];
-              return SearchMessage(
+              return MessageSearch(
                 size: size,
                 image: message.image,
                 friendName: message.friendName,
@@ -96,12 +114,27 @@ class _MessageScreenState extends State<MessageScreen> {
             ),
             itemBuilder: (BuildContext context, int index) {
               final message = demoMassage[index];
-              return MyListTitle(
-                size: size,
-                image: message.image,
-                friendName: message.friendName,
-                messageContent: message.messageContent.last,
-                time: message.time,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MessageDetail(
+                        friendName: message.friendName,
+                        messageContent: message.messageContent.last,
+                        time: message.time,
+                        image: message.image,
+                      ),
+                    ),
+                  );
+                },
+                child: MessageList(
+                  size: size,
+                  image: message.image,
+                  friendName: message.friendName,
+                  messageContent: message.messageContent.last,
+                  time: message.time,
+                ),
               );
             },
           ),
