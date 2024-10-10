@@ -121,8 +121,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     MaterialPageRoute(
                       builder: (context) => MessageDetail(
                         friendName: message.friendName,
-                        messageContent: message.messageContent.last,
-                        time: message.time,
+                        messageContent: message.messageContent,
                         image: message.image,
                       ),
                     ),
@@ -132,8 +131,9 @@ class _MessageScreenState extends State<MessageScreen> {
                   size: size,
                   image: message.image,
                   friendName: message.friendName,
-                  messageContent: message.messageContent.last,
-                  time: message.time,
+                  messageContent: message.messageContent,
+                  story: message.story,
+                  badge: message.badge,
                 ),
               );
             },
