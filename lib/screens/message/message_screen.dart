@@ -64,7 +64,7 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 
-  // hiển thị danh sách tìm kiếm
+  // Hiển thị danh sách tìm kiếm
   Column _buildMessageSearch(Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +99,7 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 
-  //  Hiển thị danh sách tin nhắn
+  // Hiển thị danh sách tin nhắn
   Column _buildMessageList(Size size) {
     return Column(
       children: [

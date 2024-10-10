@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../models/massage.dart';
@@ -19,6 +19,7 @@ class MessageDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
@@ -39,7 +40,7 @@ class MessageDetail extends StatelessWidget {
               color: const Color.fromRGBO(246, 246, 246, 1),
               child: Column(
                 children: [
-                  MessDetailsHead(
+                  MessageDetailsHead(
                     size: size,
                     image: image,
                     friendName: friendName,
@@ -47,6 +48,9 @@ class MessageDetail extends StatelessWidget {
                 ],
               ),
             ),
+
+            //Posittoned 1
+
             Positioned(
               top: size.height / 10,
               left: 0,
@@ -80,60 +84,78 @@ class MessageDetail extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: 1,
-                            itemBuilder: (context, index) {
-                              final message = messageContent[0];
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: size.width / 20,
-                                      vertical: size.height / 50,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: const Color.fromRGBO(
-                                          246, 246, 246, 1),
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    child: Text(
-                                      message.content,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        color: Color.fromRGBO(0, 0, 0, 1),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    DateFormat('HH:mm').format(message.time),
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            SvgPicture.asset("assets/icons/photo.svg"),
-                          ],
-                        ),
-                      ],
-                    ),
+                    // Column(
+                    //   children: [
+                    //     ListView.builder(
+                    //       itemCount: demoMassage.length,
+                    //       itemBuilder: (context, index) {
+                    //         final message = messageContent[index];
+                    //         return Column(
+                    //           crossAxisAlignment: CrossAxisAlignment.start,
+                    //           children: [
+                    //             Container(
+                    //               padding: EdgeInsets.symmetric(
+                    //                 horizontal: size.width / 20,
+                    //                 vertical: size.height / 50,
+                    //               ),
+                    //               decoration: BoxDecoration(
+                    //                 color:
+                    //                     const Color.fromRGBO(246, 246, 246, 1),
+                    //                 borderRadius: BorderRadius.circular(30),
+                    //               ),
+                    //               child: Text(
+                    //                 message.content,
+                    //                 style: const TextStyle(
+                    //                   fontSize: 16,
+                    //                   color: Color.fromRGBO(0, 0, 0, 1),
+                    //                   fontWeight: FontWeight.w500,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             const SizedBox(height: 4),
+                    //             Text(
+                    //               DateFormat('HH:mm').format(message.time),
+                    //               style: const TextStyle(
+                    //                 fontSize: 12,
+                    //                 color: Colors.grey,
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         );
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
             ),
-            MessageStartDate(size: size),
+
+            //Posittoned 2
+
+            Positioned(
+              top: size.height / 12,
+              left: (size.width - (size.width / 5)) / 2,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color.fromRGBO(246, 246, 246, 1),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width / 30,
+                  vertical: size.height * 0.004,
+                ),
+                child: Center(
+                  child: Text(
+                    'Hôm nay',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -141,44 +163,8 @@ class MessageDetail extends StatelessWidget {
   }
 }
 
-class MessageStartDate extends StatelessWidget {
-  const MessageStartDate({
-    super.key,
-    required this.size,
-  });
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: (size.height / 12),
-      left: (size.width - (size.width / 5)) / 2,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromRGBO(246, 246, 246, 1),
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: size.width / 30,
-          vertical: size.height * 0.004,
-        ),
-        child: Center(
-          child: Text(
-            'Hôm nay',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 14,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MessDetailsHead extends StatelessWidget {
-  const MessDetailsHead({
+class MessageDetailsHead extends StatelessWidget {
+  const MessageDetailsHead({
     super.key,
     required this.size,
     required this.image,
