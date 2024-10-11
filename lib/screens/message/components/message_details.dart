@@ -84,48 +84,48 @@ class MessageDetail extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    // Column(
-                    //   children: [
-                    //     ListView.builder(
-                    //       itemCount: demoMassage.length,
-                    //       itemBuilder: (context, index) {
-                    //         final message = messageContent[index];
-                    //         return Column(
-                    //           crossAxisAlignment: CrossAxisAlignment.start,
-                    //           children: [
-                    //             Container(
-                    //               padding: EdgeInsets.symmetric(
-                    //                 horizontal: size.width / 20,
-                    //                 vertical: size.height / 50,
-                    //               ),
-                    //               decoration: BoxDecoration(
-                    //                 color:
-                    //                     const Color.fromRGBO(246, 246, 246, 1),
-                    //                 borderRadius: BorderRadius.circular(30),
-                    //               ),
-                    //               child: Text(
-                    //                 message.content,
-                    //                 style: const TextStyle(
-                    //                   fontSize: 16,
-                    //                   color: Color.fromRGBO(0, 0, 0, 1),
-                    //                   fontWeight: FontWeight.w500,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //             const SizedBox(height: 4),
-                    //             Text(
-                    //               DateFormat('HH:mm').format(message.time),
-                    //               style: const TextStyle(
-                    //                 fontSize: 12,
-                    //                 color: Colors.grey,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         );
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
+                    // Hiển thị danh sách tin nhắn
+                    Flexible(
+                      child: ListView.builder(
+                        // shrinkWrap: true,
+                        itemCount: messageContent.length,
+                        itemBuilder: (context, index) {
+                          final message = messageContent[index];
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: size.width / 20,
+                                  vertical: size.height / 50,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(246, 246, 246, 1),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Text(
+                                  message.content,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Color.fromRGBO(0, 0, 0, 1),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                DateFormat('HH:mm').format(message.time),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -70,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordController.text,
       );
       if (context.mounted) {
+        // ignore: use_build_context_synchronously
         Navigator.pop(context);
       }
 
