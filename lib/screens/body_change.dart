@@ -54,7 +54,7 @@ class _BodyChangeState extends State<BodyChange> {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
           ),
           child: CustomBottomNavBar(
             selectedMenu: MenuState.values[_selectedIndex],

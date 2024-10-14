@@ -10,9 +10,9 @@ import '../helper/helper_fuction.dart';
 class LoginScreen extends StatefulWidget {
   final Function()? press;
   const LoginScreen({
-    Key? key,
+    super.key,
     this.press,
-  }) : super(key: key);
+  });
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(

@@ -18,7 +18,7 @@ class MessageHead extends StatelessWidget {
     return Container(
       height: size.height,
       padding: EdgeInsets.symmetric(
-        horizontal: size.width / 30,
+        horizontal: size.width / 50,
       ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -33,7 +33,7 @@ class MessageHead extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: size.height / 50),
+          SizedBox(height: size.height / 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

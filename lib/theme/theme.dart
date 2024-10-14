@@ -4,7 +4,7 @@ ThemeData theme = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
     // Thiết lập màu cho theme sáng
-    background: Color.fromRGBO(255, 255, 255, 1),
+    surface: Color.fromRGBO(255, 255, 255, 1),
     primary: Color.fromRGBO(0, 0, 0, 1),
     secondary: Color.fromRGBO(67, 86, 180, 1),
     inversePrimary: Color.fromRGBO(153, 153, 153, 1),

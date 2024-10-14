@@ -23,7 +23,7 @@ void displayMessageToUser(String message, BuildContext context) {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

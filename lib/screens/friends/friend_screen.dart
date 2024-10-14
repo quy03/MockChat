@@ -11,12 +11,12 @@ class FriendScreen extends StatefulWidget {
 }
 
 class _FriendScreenState extends State<FriendScreen> {
-  // bool _isSearching = false;
+  bool _isSearching = false;
 
   // Hàm để chuyển đổi trạng thái tìm kiếm
   void _toggleSearch(bool value) {
     setState(() {
-      // _isSearching = value;
+      _isSearching = value;
     });
   }
 
@@ -48,13 +48,45 @@ class _FriendScreenState extends State<FriendScreen> {
                   padding: EdgeInsets.symmetric(
                     horizontal: size.width / 50,
                   ),
-                  child: _buildSearchFriend(size),
+                  child: _isSearching ? _buildSearchFriend(size) : null,
                 ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Column _buildFriendsList(Size size) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: size.height / 40),
+        Padding(
+          padding: EdgeInsets.only(left: size.width / 30),
+          child: Text(
+            "DANH SÁCH BẠN BÈ",
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontSize: 14,
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: demoMassage.length,
+            itemBuilder: (context, index) {
+              final friend = demoMassage[index];
+              return FriendSearch(
+                size: size,
+                image: friend.image,
+                friendName: friend.friendName,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
