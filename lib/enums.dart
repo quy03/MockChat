@@ -3,3 +3,9 @@ enum MenuState {
   friend,
   personal,
 }
+
+enum FriendState {
+  friends,
+  all,
+  request,
+}

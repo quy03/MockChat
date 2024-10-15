@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/screens/message/components/create_new_message.dart';
 
 import '../../../components/my_search.dart';
 
@@ -33,7 +34,7 @@ class MessageHead extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: size.height / 40),
+          SizedBox(height: size.height / 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -45,19 +46,26 @@ class MessageHead extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateNewMessage(),
+                    ),
+                  );
+                },
                 child: SvgPicture.asset(
                   "assets/icons/create new message.svg",
                 ),
-              )
+              ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: size.height / 50),
           GestureDetector(
             onTap: () => {},
             child: MySearch(
               hintText: 'Tìm kiếm tin nhắn...',
-              onSearchToggle: onSearchToggle,
+              onSearchToggleMySearch: onSearchToggle,
             ),
           ),
         ],

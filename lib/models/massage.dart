@@ -46,6 +46,26 @@ List<Massage> demoMassage = [
     badge: 5,
   ),
   Massage(
+    image: 'assets/images/random1.png',
+    friendName: 'Trịnh Bảo Thúy',
+    messageContent: [
+      MessageContent(
+        content: 'Chào bạn',
+        time: DateTime.now().subtract(const Duration(minutes: 5)),
+      ),
+      MessageContent(
+        content: 'Chào bạn, Bạn có khỏe không',
+        time: DateTime.now().subtract(const Duration(minutes: 10)),
+      ),
+      MessageContent(
+        content: 'Hello',
+        time: DateTime.now().subtract(const Duration(minutes: 15)),
+      ),
+    ],
+    story: true,
+    badge: 0,
+  ),
+  Massage(
     image: 'assets/images/random2.png',
     friendName: 'Phùng Như Ý',
     messageContent: [

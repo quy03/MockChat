@@ -26,10 +26,10 @@ class _MessageScreenState extends State<MessageScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Stack(
           children: [
             MessageHead(
               size: size,
@@ -108,7 +108,7 @@ class _MessageScreenState extends State<MessageScreen> {
           child: ListView.separated(
             itemCount: demoMassage.length,
             separatorBuilder: (BuildContext context, int index) => Container(
-              margin: EdgeInsets.only(left: size.width / 5),
+              margin: EdgeInsets.only(left: size.width / 4.5),
               height: 1,
               color: Colors.grey,
             ),

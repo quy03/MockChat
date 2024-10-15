@@ -30,6 +30,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     "assets/icons/chat_nav_bar.svg",
+                    // ignore: deprecated_member_use
                     color: MenuState.message == selectedMenu
                         ? Theme.of(context).colorScheme.secondary
                         : Theme.of(context).colorScheme.inversePrimary,
@@ -90,6 +91,7 @@ class CustomBottomNavBar extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 "assets/icons/friend_nav_bar.svg",
+                // ignore: deprecated_member_use
                 color: MenuState.friend == selectedMenu
                     ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).colorScheme.inversePrimary,
@@ -117,6 +119,7 @@ class CustomBottomNavBar extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 "assets/icons/user_nav_bar.svg",
+                // ignore: deprecated_member_use
                 color: MenuState.personal == selectedMenu
                     ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).colorScheme.inversePrimary,

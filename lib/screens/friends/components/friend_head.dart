@@ -17,7 +17,7 @@ class FriendHead extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: size.width / 30,
+        horizontal: size.width / 50,
       ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -32,7 +32,7 @@ class FriendHead extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: size.height / 50),
+          SizedBox(height: size.height / 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -51,12 +51,12 @@ class FriendHead extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: size.height / 50),
           GestureDetector(
             onTap: () => {},
             child: MySearch(
               hintText: 'Tìm kiếm bạn bè...',
-              onSearchToggle: onSearchToggle,
+              onSearchToggleMySearch: onSearchToggle,
             ),
           ),
         ],

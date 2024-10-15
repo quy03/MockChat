@@ -7,11 +7,11 @@ class MySearch extends StatefulWidget {
   const MySearch({
     Key? key,
     required this.hintText,
-    required this.onSearchToggle,
+    required this.onSearchToggleMySearch,
   }) : super(key: key);
 
   final String hintText;
-  final ValueChanged<bool> onSearchToggle;
+  final ValueChanged<bool> onSearchToggleMySearch;
 
   @override
   State<MySearch> createState() => _MySearchState();
@@ -47,7 +47,7 @@ class _MySearchState extends State<MySearch> {
                     child: TextField(
                       onTap: () {
                         _isSearching = true;
-                        widget.onSearchToggle(true);
+                        widget.onSearchToggleMySearch(true);
                       },
                       controller: searchController,
                       decoration: InputDecoration(
@@ -70,7 +70,7 @@ class _MySearchState extends State<MySearch> {
           TextButton(
             onPressed: () {
               _isSearching = false;
-              widget.onSearchToggle(false);
+              widget.onSearchToggleMySearch(false);
               searchController.clear();
               FocusScope.of(context).unfocus();
             },

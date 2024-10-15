@@ -141,6 +141,7 @@ class _MessageDetailState extends State<MessageDetail> {
                     child: IconButton(
                       icon: SvgPicture.asset(
                         "assets/icons/photo.svg",
+                        // ignore: deprecated_member_use
                         color: _isImageVisible
                             ? Color.fromRGBO(67, 86, 180, 1)
                             : Color.fromRGBO(155, 155, 155, 1),
