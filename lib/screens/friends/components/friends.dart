@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart'; // Thêm import này
-import 'package:mock_chat/models/massage.dart';
+import 'package:mock_chat/models/message.dart';
 
 class Friends extends StatelessWidget {
   const Friends({super.key});
@@ -10,8 +10,8 @@ class Friends extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     // Nhóm danh sách bạn bè theo chữ cái đầu của từ cuối cùng trong tên
-    Map<String, List<Massage>> groupedFriends =
-        _groupFriendsByLastName(demoMassage);
+    Map<String, List<Message>> groupedFriends =
+        _groupFriendsByName(demoMessage);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +21,7 @@ class Friends extends StatelessWidget {
             itemCount: groupedFriends.keys.length,
             itemBuilder: (context, index) {
               String firstLetter = groupedFriends.keys.elementAt(index);
-              List<Massage> friendsInGroup = groupedFriends[firstLetter]!;
+              List<Message> friendsInGroup = groupedFriends[firstLetter]!;
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,6 +48,7 @@ class Friends extends StatelessWidget {
                       image: friend.image,
                       fullname: friend.friendName,
                     );
+                    // ignore: unnecessary_to_list_in_spreads
                   }).toList(),
                 ],
               );
@@ -58,41 +59,44 @@ class Friends extends StatelessWidget {
     );
   }
 
-  Map<String, List<Massage>> _groupFriendsByLastName(List<Massage> friends) {
-    // Tạo một bản sao của danh sách bạn bè trước khi sắp xếp
-    List<Massage> friendsCopy = List.from(friends);
+  Map<String, List<Message>> _groupFriendsByName(List<Message> friends) {
+    // Tạo một bản sao của danh sách bạn bè tránh bị thay đổi
+    List<Message> friendsCopy = List.from(friends);
 
-    // Sắp xếp bản sao theo từ cuối cùng trong tên
+    // Hàm sắp xếp bản sao theo chữ cái đầu tiền của tên
     friendsCopy.sort((a, b) {
-      return _getLastName(a.friendName).compareTo(_getLastName(b.friendName));
+      return _getName(a.friendName).compareTo(_getName(b.friendName));
     });
 
-    Map<String, List<Massage>> groupedFriends = {};
+    // Tạo nhóm bạn bè theo chữ cái đầu tiên
+    Map<String, List<Message>> groupedFriends = {};
 
+    // kiểm tra và sắp xếp danh sách
     for (var friend in friendsCopy) {
-      // Sử dụng bản sao đã sắp xếp
-      String lastName =
-          _getLastName(friend.friendName); // Lấy từ cuối cùng trong tên
-      String firstLetter = _removeDiacritics(lastName[0])
-          .toUpperCase(); // Lấy chữ cái đầu và loại bỏ dấu
+      // Lấy tên
+      String name = _getName(friend.friendName);
+
+      // Lấy chữ cái đầu tiên
+      String firstLetter = _removeDiacritics(name[0]).toUpperCase();
+
+      // Them vào danh sách nhóm theo chữ cái
       if (!groupedFriends.containsKey(firstLetter)) {
         groupedFriends[firstLetter] = [];
       }
       groupedFriends[firstLetter]!.add(friend);
     }
-
     return groupedFriends;
   }
 
-  // Hàm để lấy từ cuối cùng trong tên đầy đủ
-  String _getLastName(String fullName) {
-    List<String> nameParts = fullName.split(' ');
-    return nameParts.last; // Trả về từ cuối cùng
+// Hàm để lấy tên trả về một kiểu String
+  String _getName(String fullname) {
+    List<String> nameParts = fullname.split(' ');
+    return nameParts.last;
   }
 
-  // Hàm để loại bỏ dấu trong chữ cái
+// Hàm loại bỏ dấu khi lấy chữ cái đầu tránh lấy cả hai sử dụng thư viện "Diacritics"
   String _removeDiacritics(String input) {
-    return removeDiacritics(input); // Sử dụng thư viện diacritic để loại bỏ dấu
+    return removeDiacritics(input);
   }
 }
 
@@ -107,7 +111,6 @@ class BuildFriends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CircleAvatar(
           radius: 30,
@@ -121,7 +124,6 @@ class BuildFriends extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 16), // Khoảng cách giữa avatar và tên
         Text(
           fullname,
           style: const TextStyle(

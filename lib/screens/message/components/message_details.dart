@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:mock_chat/models/images.dart';
-
-import '../../../models/massage.dart';
+import 'package:mock_chat/models/message.dart';
 
 class MessageDetail extends StatefulWidget {
   final String friendName;

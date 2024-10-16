@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mock_chat/models/massage.dart';
+import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/message/components/list_friends.dart';
 
 import '../../../components/my_search.dart';
@@ -125,9 +125,9 @@ class CreateNewMessage extends StatelessWidget {
               height: 1,
               color: Colors.grey,
             ),
-            itemCount: demoMassage.length,
+            itemCount: demoMessage.length,
             itemBuilder: (BuildContext context, int index) {
-              final message = demoMassage[index];
+              final message = demoMessage[index];
               return ListFriends(
                 image: message.image,
                 fullname: message.friendName,

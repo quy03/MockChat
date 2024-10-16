@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/message/components/message_details.dart';
 import 'package:mock_chat/screens/message/components/message_head.dart';
 import 'package:mock_chat/screens/message/components/message_list.dart';
 import 'package:mock_chat/screens/message/components/mesage_search.dart';
-
-import '../../models/massage.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -79,14 +78,14 @@ class _MessageScreenState extends State<MessageScreen> {
         ),
         Expanded(
           child: ListView.separated(
-            itemCount: demoMassage.length,
+            itemCount: demoMessage.length,
             separatorBuilder: (BuildContext context, int index) => Container(
               margin: EdgeInsets.only(left: size.width / 5),
               height: 1,
               color: Colors.grey,
             ),
             itemBuilder: (BuildContext context, int index) {
-              final message = demoMassage[index];
+              final message = demoMessage[index];
               return MessageSearch(
                 size: size,
                 image: message.image,
@@ -106,14 +105,14 @@ class _MessageScreenState extends State<MessageScreen> {
         SizedBox(height: size.height / 50),
         Expanded(
           child: ListView.separated(
-            itemCount: demoMassage.length,
+            itemCount: demoMessage.length,
             separatorBuilder: (BuildContext context, int index) => Container(
               margin: EdgeInsets.only(left: size.width / 4.5),
               height: 1,
               color: Colors.grey,
             ),
             itemBuilder: (BuildContext context, int index) {
-              final message = demoMassage[index];
+              final message = demoMessage[index];
               return GestureDetector(
                 onTap: () {
                   Navigator.push(

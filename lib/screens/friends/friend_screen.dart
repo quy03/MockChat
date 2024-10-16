@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mock_chat/models/massage.dart';
+import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/friends/components/body_friend.dart';
 import 'package:mock_chat/screens/friends/components/friend_head.dart';
 import 'package:mock_chat/screens/friends/components/friend_search.dart';
@@ -71,9 +71,9 @@ class _FriendScreenState extends State<FriendScreen> {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: demoMassage.length,
+            itemCount: demoMessage.length,
             itemBuilder: (context, index) {
-              final friend = demoMassage[index];
+              final friend = demoMessage[index];
               return FriendSearch(
                 size: size,
                 image: friend.image,

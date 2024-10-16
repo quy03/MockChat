@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../../../models/massage.dart';
+import 'package:mock_chat/models/message.dart';
 
 class MessageList extends StatelessWidget {
   const MessageList({
