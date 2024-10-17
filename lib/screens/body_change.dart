@@ -32,13 +32,13 @@ class _BodyChangeState extends State<BodyChange> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0),
-          child: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            elevation: 0, // Loại bỏ shadow nếu muốn
-          ),
-        ),
+        // appBar: PreferredSize(
+        //   preferredSize: const Size.fromHeight(0),
+        //   child: AppBar(
+        //     backgroundColor: Theme.of(context).colorScheme.secondary,
+        //     elevation: 0,
+        //   ),
+        // ),
         body: IndexedStack(
           index: _selectedIndex,
           children: _pages,
