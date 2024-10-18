@@ -28,9 +28,15 @@ class _FriendScreenState extends State<FriendScreen> {
       child: Scaffold(
         body: Stack(
           children: [
-            FriendHead(
-              size: size,
-              onSearchToggle: _toggleSearch,
+            SizedBox(
+              width: size.width,
+              height: size.height,
+            ),
+            Positioned(
+              child: FriendHead(
+                size: size,
+                onSearchToggle: _toggleSearch,
+              ),
             ),
             Positioned(
               top: size.height / 5,

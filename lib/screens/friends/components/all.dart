@@ -29,7 +29,7 @@ class _AllState extends State<All> {
                   Container(
                     width: size.width,
                     padding: EdgeInsets.symmetric(
-                      horizontal: size.width / 30,
+                      horizontal: size.height / 50,
                       vertical: size.height * 0.005,
                     ),
                     color: const Color.fromRGBO(246, 246, 246, 1),
@@ -191,57 +191,63 @@ class _BuildAllState extends State<BuildAll> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.transparent,
-          child: ClipOval(
-            child: Image.asset(
-              widget.image,
-              fit: BoxFit.cover,
-              width: 35,
-              height: 35,
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: size.height / 50,
+        vertical: size.height * 0.008,
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            backgroundColor: Colors.transparent,
+            child: ClipOval(
+              child: Image.asset(
+                widget.image,
+                fit: BoxFit.cover,
+                width: 35,
+                height: 35,
+              ),
             ),
           ),
-        ),
-        Text(
-          widget.fullname,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+          SizedBox(width: size.width / 50),
+          Text(
+            widget.fullname,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
-        ),
-        Spacer(),
-        if (widget.isFriend)
-          GestureDetector(
-            onTap: _toggleFriendRequest,
-            child: Container(
-              alignment: Alignment.center,
-              width: size.width * 0.22,
-              padding: EdgeInsets.symmetric(vertical: size.height * 0.008),
-              decoration: BoxDecoration(
-                color: _requestSent
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(30),
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.secondary),
-              ),
-              child: Text(
-                _requestSent ? "Kết bạn" : "Hủy",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+          Spacer(),
+          if (widget.isFriend)
+            GestureDetector(
+              onTap: _toggleFriendRequest,
+              child: Container(
+                alignment: Alignment.center,
+                width: size.width * 0.22,
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.008),
+                decoration: BoxDecoration(
                   color: _requestSent
-                      ? Theme.of(context).colorScheme.surface
-                      : Theme.of(context).colorScheme.secondary,
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(
+                      color: Theme.of(context).colorScheme.secondary),
+                ),
+                child: Text(
+                  _requestSent ? "Kết bạn" : "Hủy",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: _requestSent
+                        ? Theme.of(context).colorScheme.surface
+                        : Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
               ),
             ),
-          ),
-        SizedBox(width: size.width / 30),
-      ],
+          SizedBox(width: size.width / 30),
+        ],
+      ),
     );
   }
 }

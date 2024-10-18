@@ -15,66 +15,72 @@ class CreateNewMessage extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: size.height,
-              padding: EdgeInsets.symmetric(
-                horizontal: size.width / 50,
-              ),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF4356B4),
-                    Color(0xFF3DCFCF),
-                  ],
-                  stops: [0.1, 0.4],
+              width: size.width,
+            ),
+            Positioned(
+              child: Container(
+                height: size.height / 3,
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.height / 50,
                 ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: size.height / 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: SvgPicture.asset(
-                          "assets/icons/backward-arrow.svg",
-                          height: 24,
-                          width: 24,
-                          // ignore: deprecated_member_use
-                          color: Theme.of(context).colorScheme.surface,
-                        ),
-                      ),
-                      Text(
-                        'Tạo tin nhắn',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.surface,
-                          fontSize: 18,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          "Hủy",
-                          style: TextStyle(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFF4356B4),
+                      Color(0xFF3DCFCF),
+                    ],
+                    stops: [0.1, 1],
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: size.height / 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: SvgPicture.asset(
+                            "assets/icons/backward-arrow.svg",
+                            height: 24,
+                            width: 24,
+                            // ignore: deprecated_member_use
                             color: Theme.of(context).colorScheme.surface,
-                            fontSize: 16,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: size.height / 30),
-                  GestureDetector(
-                    onTap: () => {},
-                    child: MySearch(
-                      hintText: 'Tìm kiếm tin nhắn...',
-                      onSearchToggleMySearch: (value) => {},
+                        Text(
+                          'Tạo tin nhắn',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                            fontSize: 18,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Text(
+                            "Hủy",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.surface,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(height: size.height / 30),
+                    GestureDetector(
+                      onTap: () => {},
+                      child: MySearch(
+                        hintText: 'Tìm kiếm tin nhắn...',
+                        onSearchToggleMySearch: (value) => {},
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Positioned(
@@ -92,7 +98,7 @@ class CreateNewMessage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: size.width / 50,
+                    horizontal: size.height / 50,
                   ),
                   child: _buildListFriends(size),
                 ),
@@ -116,15 +122,11 @@ class CreateNewMessage extends StatelessWidget {
           style: TextStyle(
             color: Color.fromRGBO(153, 153, 153, 1),
             fontSize: 14,
+            fontWeight: FontWeight.w800,
           ),
         ),
         Expanded(
-          child: ListView.separated(
-            separatorBuilder: (context, index) => Container(
-              margin: EdgeInsets.only(left: size.width / 6.5),
-              height: 1,
-              color: Colors.grey,
-            ),
+          child: ListView.builder(
             itemCount: demoMessage.length,
             itemBuilder: (BuildContext context, int index) {
               final message = demoMessage[index];

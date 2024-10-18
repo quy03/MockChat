@@ -15,7 +15,7 @@ class MessageSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: size.height / 50),
+        SizedBox(height: size.height / 70),
         Row(
           children: [
             CircleAvatar(
@@ -49,6 +49,11 @@ class MessageSearch extends StatelessWidget {
                       // 0,0,0,1       153,153,153,1
                       fontSize: 14,
                     ),
+                  ),
+                  SizedBox(height: size.height / 30),
+                  Container(
+                    height: 1,
+                    color: Colors.grey,
                   ),
                 ],
               ),

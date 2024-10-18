@@ -16,8 +16,9 @@ class FriendHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: size.height / 3,
       padding: EdgeInsets.symmetric(
-        horizontal: size.width / 50,
+        horizontal: size.height / 50,
       ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -27,12 +28,12 @@ class FriendHead extends StatelessWidget {
             Color(0xFF4356B4),
             Color(0xFF3DCFCF),
           ],
-          stops: [0.1, 0.4],
+          stops: [0.1, 1],
         ),
       ),
       child: Column(
         children: [
-          SizedBox(height: size.height / 20),
+          SizedBox(height: size.height / 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

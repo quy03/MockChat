@@ -26,8 +26,9 @@ class MessageList extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(height: size.height / 50),
+        SizedBox(height: size.height / 70),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               clipBehavior: Clip.none,
@@ -93,32 +94,47 @@ class MessageList extends StatelessWidget {
             SizedBox(width: size.width / 20),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    friendName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            friendName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            lastMessage?.content ?? 'No messages yet',
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        lastMessage != null
+                            ? DateFormat('HH:mm').format(lastMessage.time)
+                            : '',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    lastMessage?.content ?? 'No messages yet',
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                    ),
+                  SizedBox(height: size.height / 30),
+                  Container(
+                    height: 1,
+                    color: Colors.grey,
                   ),
                 ],
-              ),
-            ),
-            Text(
-              lastMessage != null
-                  ? DateFormat('HH:mm').format(lastMessage.time)
-                  : '',
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
               ),
             ),
           ],

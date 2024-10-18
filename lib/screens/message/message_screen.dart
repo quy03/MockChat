@@ -30,9 +30,15 @@ class _MessageScreenState extends State<MessageScreen> {
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            MessageHead(
-              size: size,
-              onSearchToggle: _toggleSearch,
+            SizedBox(
+              width: size.width,
+              height: size.height,
+            ),
+            Positioned(
+              child: MessageHead(
+                size: size,
+                onSearchToggle: _toggleSearch,
+              ),
             ),
             Positioned(
               top: size.height / 5,
@@ -48,9 +54,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   color: Color.fromRGBO(255, 255, 255, 1),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: size.width / 30,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: size.height / 50),
                   child: _isSearching
                       ? _buildMessageSearch(size)
                       : _buildMessageList(size),
@@ -72,18 +76,13 @@ class _MessageScreenState extends State<MessageScreen> {
         Text(
           "TIN NHẮN",
           style: TextStyle(
-            color: Theme.of(context).colorScheme.inversePrimary,
-            fontSize: 14,
-          ),
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontSize: 14,
+              fontWeight: FontWeight.w800),
         ),
         Expanded(
-          child: ListView.separated(
+          child: ListView.builder(
             itemCount: demoMessage.length,
-            separatorBuilder: (BuildContext context, int index) => Container(
-              margin: EdgeInsets.only(left: size.width / 5),
-              height: 1,
-              color: Colors.grey,
-            ),
             itemBuilder: (BuildContext context, int index) {
               final message = demoMessage[index];
               return MessageSearch(
@@ -104,13 +103,8 @@ class _MessageScreenState extends State<MessageScreen> {
       children: [
         SizedBox(height: size.height / 50),
         Expanded(
-          child: ListView.separated(
+          child: ListView.builder(
             itemCount: demoMessage.length,
-            separatorBuilder: (BuildContext context, int index) => Container(
-              margin: EdgeInsets.only(left: size.width / 4.5),
-              height: 1,
-              color: Colors.grey,
-            ),
             itemBuilder: (BuildContext context, int index) {
               final message = demoMessage[index];
               return GestureDetector(

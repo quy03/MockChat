@@ -21,7 +21,7 @@ class Request extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width / 30),
+                padding: EdgeInsets.symmetric(horizontal: size.height / 50),
                 child: Text(
                   "LỜI MỜI KẾT BẠN",
                   style: TextStyle(
@@ -109,53 +109,58 @@ class BuildFriendRequest extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.transparent,
-            child: ClipOval(
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-                width: 35,
-                height: 35,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: size.height / 50,
+          vertical: size.height * 0.008,
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: ClipOval(
+                child: Image.asset(
+                  image,
+                  fit: BoxFit.cover,
+                  width: 35,
+                  height: 35,
+                ),
               ),
             ),
-          ),
-          SizedBox(width: size.width * 0.05), // Khoảng cách giữa avatar và tên
-          Text(
-            fullname,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+            SizedBox(width: size.width / 50),
+            Text(
+              fullname,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {
-              // Handle friend request acceptance
-            },
-            child: Container(
-                alignment: Alignment.center,
-                width: size.width * 0.22,
-                padding: EdgeInsets.symmetric(vertical: size.height * 0.008),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                      color: Theme.of(context).colorScheme.secondary),
-                ),
-                child: Text(
-                  "Đồng ý",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.surface),
-                )),
-          ),
-          SizedBox(width: size.width / 30),
-        ],
+            const Spacer(),
+            GestureDetector(
+              onTap: () {
+                // Handle friend request acceptance
+              },
+              child: Container(
+                  alignment: Alignment.center,
+                  width: size.width * 0.22,
+                  padding: EdgeInsets.symmetric(vertical: size.height * 0.008),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.secondary),
+                  ),
+                  child: Text(
+                    "Đồng ý",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.surface),
+                  )),
+            ),
+            SizedBox(width: size.width / 30),
+          ],
+        ),
       ),
     );
   }

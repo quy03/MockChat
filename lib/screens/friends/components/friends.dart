@@ -30,7 +30,7 @@ class Friends extends StatelessWidget {
                   Container(
                     width: size.width,
                     padding: EdgeInsets.symmetric(
-                      horizontal: size.width / 30,
+                      horizontal: size.height / 50,
                       vertical: size.height * 0.005,
                     ),
                     color: const Color.fromRGBO(246, 246, 246, 1),
@@ -110,28 +110,35 @@ class BuildFriends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.transparent,
-          child: ClipOval(
-            child: Image.asset(
-              image,
-              fit: BoxFit.cover,
-              width: 35,
-              height: 35,
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: size.height / 50,
+        vertical: size.height * 0.008,
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            backgroundColor: Colors.transparent,
+            child: ClipOval(
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+                width: 35,
+                height: 35,
+              ),
             ),
           ),
-        ),
-        Text(
-          fullname,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+          SizedBox(width: size.width / 50),
+          Text(
+            fullname,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

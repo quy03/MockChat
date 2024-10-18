@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/screens/personal/components/personal_edit.dart';
 
 class PersonalScreen extends StatelessWidget {
   const PersonalScreen({super.key});
@@ -78,11 +79,21 @@ class PersonalScreen extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        SvgPicture.asset(
-                          "assets/icons/edit.svg",
-                          height: 16,
-                          width: 16,
-                          color: Color.fromRGBO(67, 86, 180, 1),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PersonalEdit(),
+                              ),
+                            );
+                          },
+                          child: SvgPicture.asset(
+                            "assets/icons/edit.svg",
+                            height: 16,
+                            width: 16,
+                            color: Color.fromRGBO(67, 86, 180, 1),
+                          ),
                         ),
                       ],
                     ),
