@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart'; // Thêm import này
 import 'package:mock_chat/models/message.dart';
 
+import '../../../contants.dart';
+
 class Friends extends StatelessWidget {
   const Friends({super.key});
 
@@ -30,16 +32,13 @@ class Friends extends StatelessWidget {
                   Container(
                     width: size.width,
                     padding: EdgeInsets.symmetric(
-                      horizontal: size.height / 50,
-                      vertical: size.height * 0.005,
+                      horizontal: 12,
+                      vertical: 5,
                     ),
                     color: const Color.fromRGBO(246, 246, 246, 1),
                     child: Text(
                       firstLetter,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: styleBody,
                     ),
                   ),
                   // Danh sách bạn bè trong nhóm
@@ -110,11 +109,10 @@ class BuildFriends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: size.height / 50,
-        vertical: size.height * 0.008,
+        horizontal: 12,
+        vertical: 5,
       ),
       child: Row(
         children: [
@@ -129,13 +127,10 @@ class BuildFriends extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: size.width / 50),
+          SizedBox(width: 12),
           Text(
             fullname,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: styleBody,
           ),
         ],
       ),

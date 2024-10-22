@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/friends/components/body_friend.dart';
-import 'package:mock_chat/screens/friends/components/friend_head.dart';
 import 'package:mock_chat/screens/friends/components/friend_search.dart';
+
+import '../../components/primary_screen_appbar.dart';
+import '../message/components/create_new_message.dart';
 
 class FriendScreen extends StatefulWidget {
   const FriendScreen({super.key});
@@ -33,9 +36,24 @@ class _FriendScreenState extends State<FriendScreen> {
               height: size.height,
             ),
             Positioned(
-              child: FriendHead(
+              child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
+                text: "Bạn bè",
+                hintText: "Tìm kiếm bạn bè...",
+                push: GestureDetector(
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => CreateNewMessage(),
+                    //   ),
+                    // );
+                  },
+                  child: SvgPicture.asset(
+                    "assets/icons/create new message.svg",
+                  ),
+                ),
               ),
             ),
             Positioned(

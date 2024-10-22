@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../contants.dart';
 import '../../../models/message.dart';
 
 class Request extends StatelessWidget {
@@ -7,8 +8,6 @@ class Request extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     List<Message> friendRequests =
         demoMessage.where((friend) => friend.friendRequest).toList();
 
@@ -21,7 +20,7 @@ class Request extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.height / 50),
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Text(
                   "LỜI MỜI KẾT BẠN",
                   style: TextStyle(
@@ -57,9 +56,9 @@ class Request extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: size.height / 50),
+              SizedBox(height: 12),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width / 30),
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Text(
                   "LỜI MỜI KẾT BẠN",
                   style: TextStyle(
@@ -111,8 +110,8 @@ class BuildFriendRequest extends StatelessWidget {
       ),
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: size.height / 50,
-          vertical: size.height * 0.008,
+          horizontal: 12,
+          vertical: 5,
         ),
         child: Row(
           children: [
@@ -127,13 +126,10 @@ class BuildFriendRequest extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: size.width / 50),
+            SizedBox(width: 12),
             Text(
               fullname,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+              style: styleBody,
             ),
             const Spacer(),
             GestureDetector(
@@ -142,20 +138,20 @@ class BuildFriendRequest extends StatelessWidget {
               },
               child: Container(
                   alignment: Alignment.center,
-                  width: size.width * 0.22,
-                  padding: EdgeInsets.symmetric(vertical: size.height * 0.008),
+                  width: 80,
+                  padding: EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: kSecondaryColor,
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.secondary),
+                    border: Border.all(color: kSecondaryColor),
                   ),
                   child: Text(
                     "Đồng ý",
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.surface),
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: kPrimaryLightColor,
+                    ),
                   )),
             ),
             SizedBox(width: size.width / 30),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/message/components/list_friends.dart';
 
-import '../../../components/my_search.dart';
+import '../../../components/secondary_screen_appbar.dart';
 
 class CreateNewMessage extends StatelessWidget {
   const CreateNewMessage({super.key});
@@ -20,68 +19,7 @@ class CreateNewMessage extends StatelessWidget {
               width: size.width,
             ),
             Positioned(
-              child: Container(
-                height: size.height / 3,
-                padding: EdgeInsets.symmetric(
-                  horizontal: size.height / 50,
-                ),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF4356B4),
-                      Color(0xFF3DCFCF),
-                    ],
-                    stops: [0.1, 1],
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(height: size.height / 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: SvgPicture.asset(
-                            "assets/icons/backward-arrow.svg",
-                            height: 24,
-                            width: 24,
-                            // ignore: deprecated_member_use
-                            color: Theme.of(context).colorScheme.surface,
-                          ),
-                        ),
-                        Text(
-                          'Tạo tin nhắn',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.surface,
-                            fontSize: 18,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            "Hủy",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.surface,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: size.height / 30),
-                    GestureDetector(
-                      onTap: () => {},
-                      child: MySearch(
-                        hintText: 'Tìm kiếm tin nhắn...',
-                        onSearchToggleMySearch: (value) => {},
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: SecondaryScreenAppbar(),
             ),
             Positioned(
               top: size.height / 5,
@@ -98,7 +36,7 @@ class CreateNewMessage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: size.height / 50,
+                    horizontal: 12,
                   ),
                   child: _buildListFriends(size),
                 ),
@@ -115,7 +53,7 @@ class CreateNewMessage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: size.height / 50,
+          height: 20,
         ),
         Text(
           "DANH SÁCH BẠN BÈ",

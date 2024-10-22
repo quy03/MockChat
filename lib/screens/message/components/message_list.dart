@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mock_chat/models/message.dart';
 
+import '../../../contants.dart';
+
 class MessageList extends StatelessWidget {
   const MessageList({
     super.key,
@@ -26,7 +28,7 @@ class MessageList extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(height: size.height / 70),
+        SizedBox(height: 20),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,7 +41,7 @@ class MessageList extends StatelessWidget {
                       ? BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           border: Border.all(
-                            color: const Color.fromRGBO(67, 86, 180, 1),
+                            color: kSecondaryColor,
                             width: 2,
                           ),
                         )
@@ -91,7 +93,7 @@ class MessageList extends StatelessWidget {
                   ),
               ],
             ),
-            SizedBox(width: size.width / 20),
+            SizedBox(width: 20),
             Expanded(
               child: Column(
                 children: [
@@ -104,10 +106,7 @@ class MessageList extends StatelessWidget {
                         children: [
                           Text(
                             friendName,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                            style: styleBody,
                           ),
                           Text(
                             lastMessage?.content ?? 'No messages yet',
@@ -129,7 +128,7 @@ class MessageList extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: size.height / 30),
+                  SizedBox(height: 30),
                   Container(
                     height: 1,
                     color: Colors.grey,
@@ -139,7 +138,6 @@ class MessageList extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: size.height / 100),
       ],
     );
   }

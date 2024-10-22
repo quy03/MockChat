@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../contants.dart';
+
 class MessageSearch extends StatelessWidget {
   const MessageSearch({
     super.key,
@@ -15,8 +17,9 @@ class MessageSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: size.height / 70),
+        SizedBox(height: 20),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
               radius: 30,
@@ -30,17 +33,14 @@ class MessageSearch extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: size.width / 20),
+            SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     friendName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                    style: styleBody,
                   ),
                   const Text(
                     "tin nhắn phù hợp",
@@ -50,7 +50,7 @@ class MessageSearch extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  SizedBox(height: size.height / 30),
+                  SizedBox(height: 30),
                   Container(
                     height: 1,
                     color: Colors.grey,
@@ -60,7 +60,6 @@ class MessageSearch extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: size.height / 100),
       ],
     );
   }

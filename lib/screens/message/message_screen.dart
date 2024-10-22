@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/components/primary_screen_appbar.dart';
 import 'package:mock_chat/models/message.dart';
+import 'package:mock_chat/screens/message/components/create_new_message.dart';
 import 'package:mock_chat/screens/message/components/message_details.dart';
-import 'package:mock_chat/screens/message/components/message_head.dart';
 import 'package:mock_chat/screens/message/components/message_list.dart';
 import 'package:mock_chat/screens/message/components/mesage_search.dart';
 
@@ -35,9 +37,25 @@ class _MessageScreenState extends State<MessageScreen> {
               height: size.height,
             ),
             Positioned(
-              child: MessageHead(
+              child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
+                text: "Tin nhắn",
+                hintText: "Tìm kiếm tin nhắn...",
+                
+                push: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CreateNewMessage(),
+                      ),
+                    );
+                  },
+                  child: SvgPicture.asset(
+                    "assets/icons/create new message.svg",
+                  ),
+                ),
               ),
             ),
             Positioned(
@@ -54,7 +72,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   color: Color.fromRGBO(255, 255, 255, 1),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.height / 50),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                   child: _isSearching
                       ? _buildMessageSearch(size)
                       : _buildMessageList(size),
@@ -72,13 +90,14 @@ class _MessageScreenState extends State<MessageScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: size.height / 50),
+        SizedBox(height: 10),
         Text(
           "TIN NHẮN",
           style: TextStyle(
-              color: Theme.of(context).colorScheme.inversePrimary,
-              fontSize: 14,
-              fontWeight: FontWeight.w800),
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontSize: 14,
+            fontWeight: FontWeight.w800,
+          ),
         ),
         Expanded(
           child: ListView.builder(
@@ -101,7 +120,7 @@ class _MessageScreenState extends State<MessageScreen> {
   Column _buildMessageList(Size size) {
     return Column(
       children: [
-        SizedBox(height: size.height / 50),
+        // SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
             itemCount: demoMessage.length,

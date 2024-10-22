@@ -12,7 +12,6 @@ class ListFriends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Row(
@@ -28,11 +27,11 @@ class ListFriends extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: size.width / 50),
+            SizedBox(width: 10),
             Expanded(
               child: Column(
                 children: [
-                  SizedBox(height: size.height / 40),
+                  SizedBox(height: 20),
                   Row(
                     children: [
                       Text(
@@ -46,7 +45,7 @@ class ListFriends extends StatelessWidget {
                       ButtonCheckbox(),
                     ],
                   ),
-                  SizedBox(height: size.height / 40),
+                  SizedBox(height: 20),
                   Container(
                     height: 1,
                     color: Colors.grey,

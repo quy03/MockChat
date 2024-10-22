@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/contants.dart';
 import 'package:mock_chat/screens/personal/components/personal_edit.dart';
 
 class PersonalScreen extends StatelessWidget {
@@ -37,13 +38,13 @@ class PersonalScreen extends StatelessWidget {
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
-                color: Color.fromRGBO(255, 255, 255, 1),
+                color: kPrimaryLightColor,
               ),
               child: Column(
                 children: [
-                  SizedBox(height: size.height / 30),
+                  SizedBox(height: 20),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width / 30),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
                     child: Row(
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -53,13 +54,13 @@ class PersonalScreen extends StatelessWidget {
                           child: ClipOval(
                             child: Image.asset(
                               "assets/images/avarta.png",
-                              height: size.height / 12,
-                              width: size.height / 12,
+                              height: 58,
+                              width: 58,
                               fit: BoxFit.fill,
                             ),
                           ),
                         ),
-                        SizedBox(width: size.height / 50),
+                        SizedBox(width: 10),
                         Text.rich(
                           TextSpan(
                             text: 'Awesame chat \n',
@@ -98,22 +99,22 @@ class PersonalScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: size.height / 30),
+                  SizedBox(height: 20),
                   Container(
                     height: 5,
                     color: Color.fromRGBO(239, 238, 238, 1),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width / 30),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
                     child: Column(
                       children: [
-                        SizedBox(height: size.height / 30),
+                        SizedBox(height: 20),
                         // Ngôn ngữ
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SvgPicture.asset("assets/icons/global.svg"),
-                            SizedBox(width: size.height / 50),
+                            SizedBox(width: 20),
                             Expanded(
                               child: Column(
                                 children: [
@@ -138,12 +139,12 @@ class PersonalScreen extends StatelessWidget {
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
-                                      SizedBox(width: size.height / 50),
+                                      SizedBox(width: 20),
                                       SvgPicture.asset(
                                           "assets/icons/right arrow.svg"),
                                     ],
                                   ),
-                                  SizedBox(height: size.height / 50),
+                                  SizedBox(height: 20),
                                   Container(
                                     height: 1,
                                     color: Color.fromRGBO(239, 238, 238, 1),
@@ -153,14 +154,14 @@ class PersonalScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: size.height / 50),
+                        SizedBox(height: 20),
 
                         // Thông báo
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SvgPicture.asset("assets/icons/megaphone.svg"),
-                            SizedBox(width: size.height / 50),
+                            SizedBox(width: 20),
                             Expanded(
                               child: Column(
                                 children: [
@@ -175,12 +176,12 @@ class PersonalScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Spacer(),
-                                      SizedBox(width: size.height / 50),
+                                      SizedBox(width: 20),
                                       SvgPicture.asset(
                                           "assets/icons/right arrow.svg"),
                                     ],
                                   ),
-                                  SizedBox(height: size.height / 50),
+                                  SizedBox(height: 20),
                                   Container(
                                     height: 1,
                                     color: Color.fromRGBO(239, 238, 238, 1),
@@ -190,14 +191,14 @@ class PersonalScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: size.height / 50),
+                        SizedBox(height: 20),
 
                         // Phiên bản ứng dụng
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SvgPicture.asset("assets/icons/reuse.svg"),
-                            SizedBox(width: size.height / 50),
+                            SizedBox(width: 20),
                             Expanded(
                               child: Column(
                                 children: [
@@ -238,14 +239,13 @@ class PersonalScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width / 30),
+                      padding: EdgeInsets.symmetric(horizontal: 12),
                       child: GestureDetector(
                         onTap: () => {},
                         child: Row(
                           children: [
                             SvgPicture.asset("assets/icons/logout.svg"),
-                            SizedBox(width: size.height / 50),
+                            SizedBox(width: 20),
                             Text(
                               "Đăng xuất",
                               style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/contants.dart';
 
 import '../../../components/my_textfield.dart';
 
@@ -29,21 +30,13 @@ class _PersonalEditState extends State<PersonalEdit> {
             Positioned(
               child: Container(
                 height: size.height / 3,
-                padding: EdgeInsets.symmetric(horizontal: size.height / 50),
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF4356B4),
-                      Color(0xFF3DCFCF),
-                    ],
-                    stops: [0.1, 1],
-                  ),
+                  gradient: kPrimaryGradientColor,
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: size.height / 20),
+                    SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -54,13 +47,13 @@ class _PersonalEditState extends State<PersonalEdit> {
                             height: 24,
                             width: 24,
                             // ignore: deprecated_member_use
-                            color: Theme.of(context).colorScheme.surface,
+                            color: kPrimaryLightColor,
                           ),
                         ),
                         Text(
                           'Chỉnh sửa thông tin',
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.surface,
+                            color: kPrimaryLightColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w800,
                           ),
@@ -70,7 +63,7 @@ class _PersonalEditState extends State<PersonalEdit> {
                           child: Text(
                             "Lưu",
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.surface,
+                              color: kPrimaryLightColor,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -121,7 +114,7 @@ class _PersonalEditState extends State<PersonalEdit> {
                             child: Container(
                               padding: const EdgeInsets.all(2.0),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface,
+                                color: kPrimaryLightColor,
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: Container(

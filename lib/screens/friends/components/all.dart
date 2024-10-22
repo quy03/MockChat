@@ -2,6 +2,8 @@ import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:mock_chat/models/message.dart';
 
+import '../../../contants.dart';
+
 class All extends StatefulWidget {
   const All({super.key});
 
@@ -29,16 +31,13 @@ class _AllState extends State<All> {
                   Container(
                     width: size.width,
                     padding: EdgeInsets.symmetric(
-                      horizontal: size.height / 50,
-                      vertical: size.height * 0.005,
+                      horizontal: 12,
+                      vertical: 5,
                     ),
                     color: const Color.fromRGBO(246, 246, 246, 1),
                     child: Text(
                       firstLetter,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: styleBody,
                     ),
                   ),
                   ...friendsInGroup.map((friend) {
@@ -193,8 +192,8 @@ class _BuildAllState extends State<BuildAll> {
     Size size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: size.height / 50,
-        vertical: size.height * 0.008,
+        horizontal: 12,
+        vertical: 5,
       ),
       child: Row(
         children: [
@@ -212,10 +211,7 @@ class _BuildAllState extends State<BuildAll> {
           SizedBox(width: size.width / 50),
           Text(
             widget.fullname,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: styleBody,
           ),
           Spacer(),
           if (widget.isFriend)
@@ -223,12 +219,10 @@ class _BuildAllState extends State<BuildAll> {
               onTap: _toggleFriendRequest,
               child: Container(
                 alignment: Alignment.center,
-                width: size.width * 0.22,
-                padding: EdgeInsets.symmetric(vertical: size.height * 0.008),
+                width: 80,
+                padding: EdgeInsets.symmetric(vertical: 5),
                 decoration: BoxDecoration(
-                  color: _requestSent
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.surface,
+                  color: _requestSent ? kSecondaryColor : kPrimaryLightColor,
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(
                       color: Theme.of(context).colorScheme.secondary),
@@ -238,9 +232,7 @@ class _BuildAllState extends State<BuildAll> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: _requestSent
-                        ? Theme.of(context).colorScheme.surface
-                        : Theme.of(context).colorScheme.secondary,
+                    color: _requestSent ? kPrimaryLightColor : kSecondaryColor,
                   ),
                 ),
               ),

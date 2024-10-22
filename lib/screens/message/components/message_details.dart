@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:mock_chat/models/images.dart';
 import 'package:mock_chat/models/message.dart';
+import 'package:mock_chat/screens/message/components/body_message_details.dart';
+import 'package:mock_chat/screens/message/components/message_details_head.dart';
 
 class MessageDetail extends StatefulWidget {
   final String friendName;
@@ -68,9 +69,8 @@ class _MessageDetailState extends State<MessageDetail> {
                     bottom: 0,
                     child: Container(
                       padding: EdgeInsets.only(
-                        top: size.height / 20,
-                        left: size.width / 50,
-                        right: size.width / 10,
+                        top: 50,
+                        left: 12,
                       ),
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
@@ -111,10 +111,6 @@ class _MessageDetailState extends State<MessageDetail> {
                       child: Center(
                         child: Text(
                           'Hôm nay',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 14,
-                          ),
                         ),
                       ),
                     ),
@@ -135,7 +131,7 @@ class _MessageDetailState extends State<MessageDetail> {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadiusDirectional.circular(50),
-                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      color: Color.fromRGBO(221, 221, 221, 1),
                     ),
                     child: IconButton(
                       icon: SvgPicture.asset(
@@ -154,11 +150,13 @@ class _MessageDetailState extends State<MessageDetail> {
                       },
                     ),
                   ),
-                  SizedBox(width: size.width / 50),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(246, 246, 246, 1),
+                        color: Color.fromRGBO(221, 221, 221, 1),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -211,7 +209,6 @@ class _MessageDetailState extends State<MessageDetail> {
                       ),
                     ),
                   ),
-                  SizedBox(width: size.width / 50),
                   if (typingMessage || _isIconVisible || _isImageVisible)
                     IconButton(
                       icon: SvgPicture.asset("assets/icons/send.svg"),
@@ -222,7 +219,7 @@ class _MessageDetailState extends State<MessageDetail> {
             ),
             if (_isImageVisible || _isIconVisible)
               SizedBox(
-                height: size.height / 3,
+                height: 230,
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
@@ -249,138 +246,6 @@ class _MessageDetailState extends State<MessageDetail> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class BodyMessageDetails extends StatelessWidget {
-  const BodyMessageDetails({
-    super.key,
-    required this.image,
-    required this.messageContent,
-    required this.size,
-  });
-
-  final String image;
-  final List<MessageContent> messageContent;
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CircleAvatar(
-          backgroundColor: Colors.transparent,
-          child: ClipOval(
-            child: Image.asset(
-              image,
-              fit: BoxFit.cover,
-              height: 42,
-              width: 42,
-            ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        // Hiển thị danh sách tin nhắn
-        Flexible(
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: messageContent.length,
-            itemBuilder: (context, index) {
-              final message = messageContent[index];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: size.width / 20,
-                      vertical: size.height / 50,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(246, 246, 246, 1),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Text(
-                      message.content,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    DateFormat('HH:mm').format(message.time),
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class MessageDetailsHead extends StatelessWidget {
-  const MessageDetailsHead({
-    super.key,
-    required this.size,
-    required this.image,
-    required this.friendName,
-  });
-
-  final Size size;
-  final String image;
-  final String friendName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: size.height * 0.015),
-        Row(
-          children: [
-            GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: SvgPicture.asset(
-                "assets/icons/backward-arrow.svg",
-                height: 24,
-                width: 24,
-              ),
-            ),
-            SizedBox(width: size.height / 80),
-            CircleAvatar(
-              backgroundColor: Colors.transparent,
-              child: ClipOval(
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                  height: 42,
-                  width: 42,
-                ),
-              ),
-            ),
-            SizedBox(width: size.height / 80),
-            Text(
-              friendName,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
