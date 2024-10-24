@@ -1,9 +1,13 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/contants.dart';
+import 'package:mock_chat/core/app_localizations.dart';
 import 'package:mock_chat/screens/personal/components/personal_edit.dart';
+
+import '../../core/locale_keys.dart';
 
 class PersonalScreen extends StatelessWidget {
   const PersonalScreen({super.key});
@@ -121,7 +125,7 @@ class PersonalScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "Ngôn Ngữ",
+                                        tr(LocaleKeys.Language),
                                         style: TextStyle(
                                           color: Color.fromRGBO(0, 0, 0, 1),
                                           fontSize: 18,
@@ -129,19 +133,66 @@ class PersonalScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Spacer(),
-                                      Text(
-                                        "Tiếng Việt",
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                      GestureDetector(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return SizedBox(
+                                                height: 150,
+                                                child: Column(
+                                                  children: [
+                                                    ListTile(
+                                                      leading:
+                                                          Icon(Icons.language),
+                                                      title: Text('English'),
+                                                      onTap: () {
+                                                        context.setLocale(
+                                                          AppLocalizations
+                                                              .engLocale,
+                                                        );
+                                                        Navigator.pop(context);
+                                                      },
+                                                    ),
+                                                    ListTile(
+                                                      leading:
+                                                          Icon(Icons.language),
+                                                      title: Text('Tiếng Việt'),
+                                                      onTap: () {
+                                                        context.setLocale(
+                                                          AppLocalizations
+                                                              .viLocale,
+                                                        );
+                                                        Navigator.pop(context);
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              context.locale ==
+                                                      AppLocalizations.engLocale
+                                                  ? "English"
+                                                  : "Tiếng Việt",
+                                              style: TextStyle(
+                                                color: kSecondaryColor,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                            SizedBox(width: 20),
+                                            GestureDetector(
+                                              child: SvgPicture.asset(
+                                                  "assets/icons/right arrow.svg"),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      SizedBox(width: 20),
-                                      SvgPicture.asset(
-                                          "assets/icons/right arrow.svg"),
                                     ],
                                   ),
                                   SizedBox(height: 20),
@@ -168,7 +219,7 @@ class PersonalScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "Thông báo",
+                                        tr(LocaleKeys.Notifications),
                                         style: TextStyle(
                                           color: Color.fromRGBO(0, 0, 0, 1),
                                           fontSize: 18,
@@ -205,7 +256,7 @@ class PersonalScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "Phiên bản ứng dụng",
+                                        tr(LocaleKeys.Version),
                                         style: TextStyle(
                                           color: Color.fromRGBO(0, 0, 0, 1),
                                           fontSize: 18,
@@ -247,7 +298,7 @@ class PersonalScreen extends StatelessWidget {
                             SvgPicture.asset("assets/icons/logout.svg"),
                             SizedBox(width: 20),
                             Text(
-                              "Đăng xuất",
+                              tr(LocaleKeys.LogOut),
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Color.fromRGBO(201, 35, 35, 1),

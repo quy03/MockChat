@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/core/locale_keys.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/friends/components/body_friend.dart';
 import 'package:mock_chat/screens/friends/components/friend_search.dart';
 
 import '../../components/primary_screen_appbar.dart';
-import '../message/components/create_new_message.dart';
 
 class FriendScreen extends StatefulWidget {
   const FriendScreen({super.key});
@@ -39,8 +40,8 @@ class _FriendScreenState extends State<FriendScreen> {
               child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
-                text: "Bạn bè",
-                hintText: "Tìm kiếm bạn bè...",
+                text: tr(LocaleKeys.Friends),
+                hintText: tr(LocaleKeys.SearchFriends),
                 push: GestureDetector(
                   onTap: () {
                     // Navigator.push(
@@ -86,7 +87,7 @@ class _FriendScreenState extends State<FriendScreen> {
         Padding(
           padding: EdgeInsets.only(left: size.width / 30),
           child: Text(
-            "BẠN BÈ",
+            tr(LocaleKeys.Friends),
             style: TextStyle(
               color: Theme.of(context).colorScheme.inversePrimary,
               fontSize: 14,

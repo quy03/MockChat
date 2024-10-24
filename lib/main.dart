@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mock_chat/screens/body_change.dart';
@@ -6,14 +7,27 @@ import 'package:mock_chat/screens/login_screen.dart';
 import 'package:mock_chat/screens/message/message_screen.dart';
 import 'package:mock_chat/screens/register_screen.dart';
 import 'package:mock_chat/theme/theme.dart';
+import 'core/app_localizations.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [
+        AppLocalizations.engLocale,
+        AppLocalizations.viLocale,
+      ],
+      path: AppLocalizations.translationFilePath,
+      fallbackLocale: AppLocalizations.engLocale,
+      startLocale: AppLocalizations.engLocale,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +36,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme,

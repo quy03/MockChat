@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mock_chat/core/locale_keys.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/message/components/list_friends.dart';
 
@@ -56,7 +58,7 @@ class CreateNewMessage extends StatelessWidget {
           height: 20,
         ),
         Text(
-          "DANH SÁCH BẠN BÈ",
+          tr(LocaleKeys.FriendsList),
           style: TextStyle(
             color: Color.fromRGBO(153, 153, 153, 1),
             fontSize: 14,

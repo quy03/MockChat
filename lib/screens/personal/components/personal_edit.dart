@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/contants.dart';
+import 'package:mock_chat/core/locale_keys.dart';
 
 import '../../../components/my_textfield.dart';
 
@@ -51,7 +53,7 @@ class _PersonalEditState extends State<PersonalEdit> {
                           ),
                         ),
                         Text(
-                          'Chỉnh sửa thông tin',
+                          tr(LocaleKeys.ChangeInformation),
                           style: TextStyle(
                             color: kPrimaryLightColor,
                             fontSize: 18,
@@ -61,7 +63,7 @@ class _PersonalEditState extends State<PersonalEdit> {
                         GestureDetector(
                           onTap: () {},
                           child: Text(
-                            "Lưu",
+                            tr(LocaleKeys.Save),
                             style: TextStyle(
                               color: kPrimaryLightColor,
                               fontSize: 16,
@@ -87,12 +89,12 @@ class _PersonalEditState extends State<PersonalEdit> {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   ),
-                  color: Color.fromRGBO(255, 255, 255, 1),
+                  color: kPrimaryLightColor,
                 ),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: size.height / 20),
+                      SizedBox(height: 30),
                       Stack(
                         clipBehavior: Clip.none,
                         children: [
@@ -135,24 +137,24 @@ class _PersonalEditState extends State<PersonalEdit> {
                       SizedBox(height: size.height / 20),
                       MyTextField(
                         svgIcon: 'assets/icons/user.svg',
-                        labelText: 'HỌ VÀ TÊN',
-                        hintText: 'Nhập họ và tên của bạn',
+                        labelText: tr(LocaleKeys.FullName),
+                        hintText: tr(LocaleKeys.EnterYourFullName),
                         obscureText: false,
                         controller: fullnameController,
                       ),
                       SizedBox(height: size.height / 30),
                       MyTextField(
                         svgIcon: 'assets/icons/telephone.svg',
-                        labelText: 'SỐ ĐIỆN THOẠI',
-                        hintText: 'Nhập số điện thoại của bạn',
+                        labelText: tr(LocaleKeys.PhoneNumber),
+                        hintText: tr(LocaleKeys.EnterYourPhoneNumber),
                         obscureText: false,
                         controller: phonenumberController,
                       ),
                       SizedBox(height: size.height / 30),
                       MyTextField(
                         svgIcon: 'assets/icons/birthday-cake.svg',
-                        labelText: 'NGÀY SINH',
-                        hintText: 'Nhập ngày sinh của bạn',
+                        labelText: tr(LocaleKeys.DateOfBirth),
+                        hintText: tr(LocaleKeys.EnterYourDateOfBirth),
                         obscureText: false,
                         controller: fullnameController,
                       ),

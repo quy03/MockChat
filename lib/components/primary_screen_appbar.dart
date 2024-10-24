@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mock_chat/screens/message/components/create_new_message.dart';
 
 import '../../../components/my_search.dart';
 import '../contants.dart';

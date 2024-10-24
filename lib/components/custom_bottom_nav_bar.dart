@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/core/locale_keys.dart';
 
 import '../enums.dart';
 
@@ -71,7 +73,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 ],
               ),
               Text(
-                "Tin nhắn",
+                tr(LocaleKeys.Messages),
                 style: TextStyle(
                   color: MenuState.message == selectedMenu
                       ? Theme.of(context).colorScheme.secondary
@@ -99,7 +101,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 28,
               ),
               Text(
-                "Bạn bè",
+                tr(LocaleKeys.Friends),
                 style: TextStyle(
                   color: MenuState.friend == selectedMenu
                       ? Theme.of(context).colorScheme.secondary
@@ -127,7 +129,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 28,
               ),
               Text(
-                "Trang cá nhân",
+                tr(LocaleKeys.Profile),
                 style: TextStyle(
                   color: MenuState.personal == selectedMenu
                       ? Theme.of(context).colorScheme.secondary

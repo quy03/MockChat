@@ -8,8 +8,8 @@ const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
   colors: [
-    Color(0xFF4356B4),
-    Color(0xFF3DCFCF),
+    Color.fromRGBO(67, 86, 180, 1),
+    Color.fromRGBO(21, 207, 207, 1),
   ],
   stops: [0.1, 1],
 );

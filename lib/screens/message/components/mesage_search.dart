@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mock_chat/core/locale_keys.dart';
 
 import '../../../contants.dart';
 
@@ -42,8 +44,8 @@ class MessageSearch extends StatelessWidget {
                     friendName,
                     style: styleBody,
                   ),
-                  const Text(
-                    "tin nhắn phù hợp",
+                  Text(
+                    tr(LocaleKeys.MatchingMessages),
                     style: TextStyle(
                       color: Colors.grey,
                       // 0,0,0,1       153,153,153,1

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/components/primary_screen_appbar.dart';
@@ -6,6 +7,8 @@ import 'package:mock_chat/screens/message/components/create_new_message.dart';
 import 'package:mock_chat/screens/message/components/message_details.dart';
 import 'package:mock_chat/screens/message/components/message_list.dart';
 import 'package:mock_chat/screens/message/components/mesage_search.dart';
+
+import '../../core/locale_keys.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -40,9 +43,8 @@ class _MessageScreenState extends State<MessageScreen> {
               child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
-                text: "Tin nhắn",
-                hintText: "Tìm kiếm tin nhắn...",
-                
+                text: tr(LocaleKeys.Messages),
+                hintText: tr(LocaleKeys.SearchMessages),
                 push: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -92,7 +94,7 @@ class _MessageScreenState extends State<MessageScreen> {
       children: [
         SizedBox(height: 10),
         Text(
-          "TIN NHẮN",
+          tr(LocaleKeys.Messages),
           style: TextStyle(
             color: Theme.of(context).colorScheme.inversePrimary,
             fontSize: 14,

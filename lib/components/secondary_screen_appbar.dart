@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/components/my_search.dart';
 
 import '../contants.dart';
+import '../core/locale_keys.dart';
 
 class SecondaryScreenAppbar extends StatelessWidget {
   const SecondaryScreenAppbar({super.key});
@@ -35,7 +37,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
                 ),
               ),
               Text(
-                'Tạo tin nhắn',
+                tr(LocaleKeys.CreateMessage),
                 style: TextStyle(
                   color: kPrimaryLightColor,
                   fontSize: 18,
@@ -44,7 +46,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Text(
-                  "Hủy",
+                  tr(LocaleKeys.Cancel),
                   style: TextStyle(
                     color: kPrimaryLightColor,
                     fontSize: 16,
@@ -57,7 +59,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
           GestureDetector(
             onTap: () => {},
             child: MySearch(
-              hintText: 'Tìm kiếm tin nhắn...',
+              hintText: tr(LocaleKeys.SearchMessages),
               onSearchToggleMySearch: (value) => {},
             ),
           ),
