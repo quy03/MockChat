@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mock_chat/screens/friends/friend_screen.dart';
 import 'package:mock_chat/screens/message/message_screen.dart';
 import 'package:mock_chat/screens/personal/personal_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../components/custom_bottom_nav_bar.dart';
 import '../enums.dart';
+import '../provider/tab_provider.dart';
 
 class BodyChange extends StatefulWidget {
   const BodyChange({super.key});
@@ -14,13 +16,13 @@ class BodyChange extends StatefulWidget {
 }
 
 class _BodyChangeState extends State<BodyChange> {
-  int _selectedIndex = 0;
+  // int _selectedIndex = 0;
 
-  void _onItemTappped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  // void _onItemTappped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
 
   final List<Widget> _pages = [
     const MessageScreen(),
@@ -30,6 +32,8 @@ class _BodyChangeState extends State<BodyChange> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final tabProvider = Provider.of<TabProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         // appBar: PreferredSize(
@@ -40,7 +44,7 @@ class _BodyChangeState extends State<BodyChange> {
         //   ),
         // ),
         body: IndexedStack(
-          index: _selectedIndex,
+          index: tabProvider.selectedIndex,
           children: _pages,
         ),
         bottomNavigationBar: Container(
@@ -58,8 +62,7 @@ class _BodyChangeState extends State<BodyChange> {
               color: Theme.of(context).colorScheme.surface,
             ),
             child: CustomBottomNavBar(
-              selectedMenu: MenuState.values[_selectedIndex],
-              onItemTapped: _onItemTappped,
+              selectedMenu: MenuState.values[tabProvider.selectedIndex],
               messageBadgeCount: 3,
             ),
           ),

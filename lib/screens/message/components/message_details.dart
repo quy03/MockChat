@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mock_chat/contants.dart';
 import 'package:mock_chat/models/images.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/message/components/body_message_details.dart';
 import 'package:mock_chat/screens/message/components/message_details_head.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/color_provider.dart';
 
 class MessageDetail extends StatefulWidget {
   final String friendName;
@@ -29,11 +33,12 @@ class _MessageDetailState extends State<MessageDetail> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final iconColoProvider = Provider.of<ColorProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
-          backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
+          backgroundColor: kPrimaryLightColor,
           elevation: 0,
         ),
       ),
@@ -49,7 +54,7 @@ class _MessageDetailState extends State<MessageDetail> {
                       vertical: size.height / 50,
                       horizontal: size.height / 80,
                     ),
-                    color: const Color.fromRGBO(246, 246, 246, 1),
+                    color: kPrimaryLightColor,
                     child: Column(
                       children: [
                         MessageDetailsHead(
@@ -102,7 +107,7 @@ class _MessageDetailState extends State<MessageDetail> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: const Color.fromRGBO(246, 246, 246, 1),
+                        color: kPrimaryLightColor,
                       ),
                       padding: EdgeInsets.symmetric(
                         horizontal: size.width / 30,
@@ -138,8 +143,8 @@ class _MessageDetailState extends State<MessageDetail> {
                         "assets/icons/photo.svg",
                         // ignore: deprecated_member_use
                         color: _isImageVisible
-                            ? Color.fromRGBO(67, 86, 180, 1)
-                            : Color.fromRGBO(155, 155, 155, 1),
+                            ? iconColoProvider.selectedColor
+                            : iconColoProvider.unselectedColor,
                       ),
                       onPressed: () {
                         FocusScope.of(context).unfocus();
@@ -193,9 +198,11 @@ class _MessageDetailState extends State<MessageDetail> {
                           ),
                           IconButton(
                             icon: SvgPicture.asset(
-                              _isIconVisible
-                                  ? "assets/icons/smile 1.svg"
-                                  : "assets/icons/smile.svg",
+                              "assets/icons/smile.svg",
+                              // ignore: deprecated_member_use
+                              color: _isIconVisible
+                                  ? iconColoProvider.selectedColor
+                                  : iconColoProvider.unselectedColor,
                             ),
                             onPressed: () {
                               setState(() {

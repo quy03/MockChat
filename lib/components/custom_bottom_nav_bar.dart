@@ -2,28 +2,32 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/core/locale_keys.dart';
+import 'package:mock_chat/provider/tab_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../enums.dart';
+import '../provider/color_provider.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
     super.key,
     required this.selectedMenu,
-    required this.onItemTapped,
     required this.messageBadgeCount,
   });
   final MenuState selectedMenu;
-  final Function(int) onItemTapped;
   final int messageBadgeCount;
 
   @override
   Widget build(BuildContext context) {
+    final iconColorProvider = Provider.of<ColorProvider>(context);
+    final tabProvider = Provider.of<TabProvider>(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         // Tin nhắn
         GestureDetector(
-          onTap: () => onItemTapped(0),
+          onTap: () => tabProvider.setSelectedIndex(0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -34,8 +38,8 @@ class CustomBottomNavBar extends StatelessWidget {
                     "assets/icons/chat_nav_bar.svg",
                     // ignore: deprecated_member_use
                     color: MenuState.message == selectedMenu
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.inversePrimary,
+                        ? iconColorProvider.selectedColor
+                        : iconColorProvider.unselectedColor,
                     height: 28,
                     width: 28,
                   ),
@@ -76,8 +80,8 @@ class CustomBottomNavBar extends StatelessWidget {
                 tr(LocaleKeys.Messages),
                 style: TextStyle(
                   color: MenuState.message == selectedMenu
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.inversePrimary,
+                      ? iconColorProvider.selectedColor
+                      : iconColorProvider.unselectedColor,
                   fontSize: 14,
                 ),
               ),
@@ -87,7 +91,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
         // Bạn bè
         GestureDetector(
-          onTap: () => onItemTapped(1),
+          onTap: () => tabProvider.setSelectedIndex(1),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -95,8 +99,8 @@ class CustomBottomNavBar extends StatelessWidget {
                 "assets/icons/friend_nav_bar.svg",
                 // ignore: deprecated_member_use
                 color: MenuState.friend == selectedMenu
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.inversePrimary,
+                    ? iconColorProvider.selectedColor
+                    : iconColorProvider.unselectedColor,
                 height: 28,
                 width: 28,
               ),
@@ -104,8 +108,8 @@ class CustomBottomNavBar extends StatelessWidget {
                 tr(LocaleKeys.Friends),
                 style: TextStyle(
                   color: MenuState.friend == selectedMenu
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.inversePrimary,
+                      ? iconColorProvider.selectedColor
+                      : iconColorProvider.unselectedColor,
                   fontSize: 14,
                 ),
               ),
@@ -115,7 +119,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
         // Trang cá nhân
         GestureDetector(
-          onTap: () => onItemTapped(2),
+          onTap: () => tabProvider.setSelectedIndex(2),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -123,8 +127,8 @@ class CustomBottomNavBar extends StatelessWidget {
                 "assets/icons/user_nav_bar.svg",
                 // ignore: deprecated_member_use
                 color: MenuState.personal == selectedMenu
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.inversePrimary,
+                    ? iconColorProvider.selectedColor
+                    : iconColorProvider.unselectedColor,
                 height: 28,
                 width: 28,
               ),
@@ -132,8 +136,8 @@ class CustomBottomNavBar extends StatelessWidget {
                 tr(LocaleKeys.Profile),
                 style: TextStyle(
                   color: MenuState.personal == selectedMenu
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.inversePrimary,
+                      ? iconColorProvider.selectedColor
+                      : iconColorProvider.unselectedColor,
                   fontSize: 14,
                 ),
               ),

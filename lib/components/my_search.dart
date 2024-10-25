@@ -2,6 +2,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/contants.dart';
 import 'package:mock_chat/core/locale_keys.dart';
 
 class MySearch extends StatefulWidget {
@@ -31,7 +32,7 @@ class _MySearchState extends State<MySearch> {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-              color: Color.fromRGBO(255, 255, 255, 1),
+              color: kPrimaryLightColor,
               borderRadius: BorderRadius.circular(50),
             ),
             child: Row(

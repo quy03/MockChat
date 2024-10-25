@@ -2,21 +2,26 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mock_chat/core/locale_keys.dart';
 import 'package:mock_chat/enums.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/color_provider.dart';
+import '../../../provider/friend_tab_provider';
 
 class SubTabFriend extends StatelessWidget {
   const SubTabFriend({
     super.key,
     required this.selectedFriend,
-    required this.onItemTapped,
     required this.badge,
   });
 
   final FriendState selectedFriend;
-  final Function(int) onItemTapped;
   final int badge;
 
   @override
   Widget build(BuildContext context) {
+    final iconColorProvider = Provider.of<ColorProvider>(context);
+    final friendTabProvider = Provider.of<FriendTabProvider>(context);
+
     return Column(
       children: [
         SizedBox(height: 10),
@@ -26,7 +31,7 @@ class SubTabFriend extends StatelessWidget {
             // Tab "BẠN BÈ"
             GestureDetector(
               onTap: () {
-                onItemTapped(0);
+                friendTabProvider.setSelectedIndex(0);
               },
               child: Column(
                 children: [
@@ -35,8 +40,8 @@ class SubTabFriend extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedFriend == FriendState.friends
-                          ? Theme.of(context).colorScheme.secondary
-                          : Theme.of(context).colorScheme.inversePrimary,
+                          ? iconColorProvider.selectedColor
+                          : iconColorProvider.unselectedColor,
                     ),
                   ),
                   SizedBox(height: 5),
@@ -46,7 +51,7 @@ class SubTabFriend extends StatelessWidget {
             // Tab "TẤT CẢ"
             GestureDetector(
               onTap: () {
-                onItemTapped(1);
+                friendTabProvider.setSelectedIndex(1);
               },
               child: Column(
                 children: [
@@ -55,8 +60,8 @@ class SubTabFriend extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedFriend == FriendState.all
-                          ? Theme.of(context).colorScheme.secondary
-                          : Theme.of(context).colorScheme.inversePrimary,
+                          ? iconColorProvider.selectedColor
+                          : iconColorProvider.unselectedColor,
                     ),
                   ),
                   SizedBox(height: 5),
@@ -66,7 +71,7 @@ class SubTabFriend extends StatelessWidget {
             // Tab "YÊU CẦU"
             GestureDetector(
               onTap: () {
-                onItemTapped(2);
+                friendTabProvider.setSelectedIndex(2);
               },
               child: Column(
                 children: [
@@ -77,8 +82,8 @@ class SubTabFriend extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: selectedFriend == FriendState.request
-                              ? Theme.of(context).colorScheme.secondary
-                              : Theme.of(context).colorScheme.inversePrimary,
+                              ? iconColorProvider.selectedColor
+                              : iconColorProvider.unselectedColor,
                         ),
                       ),
                       SizedBox(width: 5),
@@ -111,24 +116,24 @@ class SubTabFriend extends StatelessWidget {
               child: Container(
                 height: 2,
                 color: selectedFriend == FriendState.friends
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.inversePrimary,
+                    ? iconColorProvider.selectedColor
+                    : iconColorProvider.unselectedColor,
               ),
             ),
             Expanded(
               child: Container(
                 height: 2,
                 color: selectedFriend == FriendState.all
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.inversePrimary,
+                    ? iconColorProvider.selectedColor
+                    : iconColorProvider.unselectedColor,
               ),
             ),
             Expanded(
               child: Container(
                 height: 2,
                 color: selectedFriend == FriendState.request
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.inversePrimary,
+                    ? iconColorProvider.selectedColor
+                    : iconColorProvider.unselectedColor,
               ),
             ),
           ],
