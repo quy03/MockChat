@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/contants.dart';
 import 'package:mock_chat/core/locale_keys.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/friends/components/body_friend.dart';
@@ -89,7 +90,7 @@ class _FriendScreenState extends State<FriendScreen> {
           child: Text(
             tr(LocaleKeys.Friends),
             style: TextStyle(
-              color: Theme.of(context).colorScheme.inversePrimary,
+              color: kInversePrimaryColor,
               fontSize: 14,
             ),
           ),

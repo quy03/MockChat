@@ -28,7 +28,7 @@ class PrimaryScreenAppbar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: 30),
+          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 import '../helper/helper_fuction.dart';
@@ -14,6 +14,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final AuthMethods _authMethods = AuthMethods();
   // kiểm tra nút checkbox
   bool _isChecked = false;
   String? checkBox;
@@ -22,6 +23,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController fullnameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  // giải phóng dữ liệu không cần thiết
+  @override
+  void dispose() {
+    fullnameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   // Hàm kiểm tra tính hợp lệ của email
   String? _validateEmail(String email) {
@@ -44,7 +54,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   // Hàm đăng ký người dùng
   Future<void> registerUser() async {
-    // Kiểm tra tính hợp lệ của email và mật khẩu
     final emailError = _validateEmail(emailController.text);
     final passwordError = _validatePassword(passwordController.text);
 
@@ -63,63 +72,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    // Kiểm tra trạng thái checkbox
     if (!_isChecked) {
       setState(() {
         checkBox = "Bạn phải đồng ý với chính sách và điều khoản";
       });
       displayMessageToUser(checkBox!, context);
-
       return;
-    } else {
-      setState(() {
-        checkBox = null; // Xóa thông báo lỗi nếu checkbox đã được chọn
-      });
     }
 
-    // Hiển thị vòng tròn loading khi đăng ký
     showDialog(
       context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
-    try {
-      // Đăng ký với Firebase
-      // ignore: unused_local_variable
-      UserCredential? userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
+    final result = await _authMethods.registerUser(
+      email: emailController.text,
+      password: passwordController.text,
+      fullname: fullnameController.text,
+    );
 
-      // Tắt loading
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+    Navigator.pop(context);
 
-      // ignore: use_build_context_synchronously
-      displayMessageToUser('Đăng ký thành công', context);
-    } on FirebaseAuthException catch (e) {
-      // Tắt loading
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
-
-      // Xử lý các lỗi thường gặp
-      String errorMessage = '';
-      if (e.code == 'email-already-in-use') {
-        errorMessage = 'Email này đã được sử dụng';
-      } else if (e.code == 'invalid-email') {
-        errorMessage = 'Email không hợp lệ';
-      } else if (e.code == 'weak-password') {
-        errorMessage = 'Mật khẩu quá yếu';
-      } else {
-        errorMessage = 'Đã xảy ra lỗi. Vui lòng thử lại sau.';
-      }
-
-      // Hiển thị lỗi
-      // ignore: use_build_context_synchronously
-      displayMessageToUser(errorMessage, context);
+    if (result != null) {
+      displayMessageToUser(result, context);
+    } else {
+      // Navigator.pushNamed(context, '/body_change');@gma
     }
   }
 

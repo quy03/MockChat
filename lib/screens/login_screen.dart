@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mock_chat/components/my_textfield.dart';
 
+import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
 import '../helper/helper_fuction.dart';
 
@@ -19,9 +19,19 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthMethods _authMethods = AuthMethods();
+
   // text controllers / kiểm soát và quản lý nội dung của trường nhập dữ liệu
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  // giải phóng dữ liệu không cần thiết
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   // Hàm kiểm tra tính hợp lệ của email
   String? _validateEmail(String email) {
@@ -64,38 +74,17 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      if (context.mounted) {
-        // ignore: use_build_context_synchronously
-        Navigator.pop(context);
-      }
+    String? result = await _authMethods.loginUser(
+      email: emailController.text,
+      password: passwordController.text,
+    );
 
-      // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, '/message_screen');
-    } on FirebaseException catch (e) {
-      // Tắt loading
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+    Navigator.pop(context);
 
-      // Xử lý các lỗi thường gặp
-      String errorMessage = '';
-      if (e.code == 'email-already-in-use') {
-        errorMessage = 'Email này đã được sử dụng';
-      } else if (e.code == 'invalid-email') {
-        errorMessage = 'Email không hợp lệ';
-      } else if (e.code == 'weak-password') {
-        errorMessage = 'Mật khẩu quá yếu';
-      } else {
-        errorMessage = 'Đã xảy ra lỗi. Vui lòng thử lại sau.';
-      }
-
-      // Hiển thị lỗi
-      // ignore: use_build_context_synchronously
-      displayMessageToUser(errorMessage, context);
+    if (result != null) {
+      displayMessageToUser(result, context);
+    } else {
+      // Navigator.pushNamed(context, '/body_change');
     }
   }
 

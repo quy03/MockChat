@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mock_chat/auth/auth_page.dart';
 import 'package:mock_chat/provider/friend_tab_provider';
 import 'package:mock_chat/provider/tab_provider.dart';
+import 'package:mock_chat/provider/user_provider.dart';
 import 'package:mock_chat/screens/body_change.dart';
 import 'package:mock_chat/screens/friends/friend_screen.dart';
 import 'package:mock_chat/screens/login_screen.dart';
@@ -36,6 +38,7 @@ Future<void> main() async {
           ChangeNotifierProvider<TabProvider>(create: (_) => TabProvider()),
           ChangeNotifierProvider<FriendTabProvider>(
               create: (_) => FriendTabProvider()),
+          ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ],
         child: MyApp(),
       ),
@@ -55,12 +58,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme,
-      home: const BodyChange(),
+      home: const AuthPage(),
       routes: {
         '/login_screen': (context) => const LoginScreen(),
         '/register_screen': (context) => const RegisterScreen(),
         '/message_screen': (context) => const MessageScreen(),
-        '/friend_screen': (context) => const FriendScreen(),
+        '/friend_screen': (context) => FriendScreen(),
+        '/body_change': (context) => const BodyChange(),
       },
     );
   }
