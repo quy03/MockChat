@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../auth/auth_methods.dart';
+import '../auth/auth_page.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 import '../core/locale_keys.dart';
@@ -84,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     showDialog(
       context: context,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
+      builder: (context) => Center(child: CircularProgressIndicator()),
     );
 
     final result = await _authMethods.registerUser(
@@ -92,16 +93,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
       password: passwordController.text,
       fullname: fullnameController.text,
     );
-
-    Navigator.pop(context);
+// Kiểm tra giá trị của result
+    print('Registration result: $result');
+    print('Registration result: $mounted');
+    if (mounted) Navigator.pop(context);
 
     if (result != null) {
       if (mounted) {
         displayMessageToUser(result, context);
       }
-    } else {
       if (mounted) {
-        Navigator.pushNamed(context, '/body_change');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => AuthPage()),
+        );
       }
     }
   }
