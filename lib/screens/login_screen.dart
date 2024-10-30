@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mock_chat/components/my_textfield.dart';
 
 import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
+import '../core/locale_keys.dart';
 import '../helper/helper_fuction.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -114,13 +116,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       // Text app name
-                      const Text(
-                        "Trải nghiệm Awesome chat",
+                      Text(
+                        tr(LocaleKeys.Experience),
                         style: TextStyle(fontSize: 26),
                       ),
                       // Text đăng nhập
                       Text(
-                        "Đăng nhập",
+                        tr(LocaleKeys.Login),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 32,
@@ -133,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       MyTextField(
                         svgIcon: 'assets/icons/mail.svg',
                         labelText: 'EMAIL',
-                        hintText: 'Nhập email của bạn',
+                        hintText: tr(LocaleKeys.EnterYourEmail),
                         obscureText: false,
                         controller: emailController,
                       ),
@@ -142,8 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       // password textfield
                       MyTextField(
                         svgIcon: 'assets/icons/key.svg',
-                        labelText: 'MẬT KHẨU',
-                        hintText: 'Nhập mật khẩu của bạn',
+                        labelText: tr(LocaleKeys.Password),
+                        hintText: tr(LocaleKeys.EnterYourPassword),
                         obscureText: true,
                         controller: passwordController,
                       ),
@@ -154,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            "Quên mật khẩu?",
+                            tr(LocaleKeys.ForgotYourPassword),
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.bold,
@@ -171,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       // nút đăng nhập
                       MyButton(
-                        text: 'ĐĂNG NHẬP',
+                        text: tr(LocaleKeys.Login),
                         onTap: loginUser,
                       ),
                       SizedBox(height: size.height / 10),
@@ -180,15 +182,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Chưa có tài khoản?",
+                          Text(
+                            tr(LocaleKeys.DoNotHaveAnAccount),
                             style:
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
                           ),
                           GestureDetector(
                             onTap: widget.press,
                             child: Text(
-                              " Đăng ký ngay",
+                              tr(LocaleKeys.SignUpNow),
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.bold,

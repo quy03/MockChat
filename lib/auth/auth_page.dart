@@ -15,7 +15,9 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
-              return BodyChange();
+               if (context.mounted) {
+                return BodyChange();
+              }
             }
             if (snapshot.hasError) {
               return Center(

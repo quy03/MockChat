@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
+import '../core/locale_keys.dart';
 import '../helper/helper_fuction.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -130,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(height: size.height / 20),
                       // text đăng ký
                       Text(
-                        "Đăng ký",
+                        tr(LocaleKeys.SignUp),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 32,
@@ -141,8 +143,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // fullname textfield
                       MyTextField(
                         svgIcon: 'assets/icons/user.svg',
-                        labelText: 'HỌ VÀ TÊN',
-                        hintText: 'Nhập họ và tên của bạn',
+                        labelText: tr(LocaleKeys.FullName),
+                        hintText: tr(LocaleKeys.EnterYourFullName),
                         obscureText: false,
                         controller: fullnameController,
                       ),
@@ -152,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       MyTextField(
                         svgIcon: 'assets/icons/mail.svg',
                         labelText: 'EMAIL',
-                        hintText: 'Nhập email của bạn',
+                        hintText: tr(LocaleKeys.EnterYourEmail),
                         obscureText: false,
                         controller: emailController,
                       ),
@@ -161,8 +163,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // password textfield
                       MyTextField(
                         svgIcon: 'assets/icons/key.svg',
-                        labelText: 'MẬT KHẨU',
-                        hintText: 'Nhập mật khẩu của bạn',
+                        labelText: tr(LocaleKeys.Password),
+                        hintText: tr(LocaleKeys.EnterYourPassword),
                         obscureText: true,
                         controller: passwordController,
                       ),
@@ -207,26 +209,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Text.rich(
                             TextSpan(
                               children: [
-                                const TextSpan(
-                                  text: "Tôi đồng ý với ",
+                                TextSpan(
+                                  text: tr(LocaleKeys.IagreeToThe) + " ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
                                 TextSpan(
-                                  text: "chính sách",
+                                  text: tr(LocaleKeys.Policies) + " ",
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.secondary,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const TextSpan(
-                                  text: ' và ',
+                                TextSpan(
+                                  text: tr(LocaleKeys.And) + " ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
                                 TextSpan(
-                                  text: 'điều khoản',
+                                  text: tr(LocaleKeys.Terms),
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.secondary,
@@ -246,7 +248,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       // nút đăng ký
                       MyButton(
-                        text: 'ĐĂNG KÝ',
+                        text: tr(LocaleKeys.SignUp),
                         onTap: registerUser,
                       ),
                       SizedBox(height: size.height / 10),
@@ -255,15 +257,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Đã có tài khoản?",
+                          Text(
+                            tr(LocaleKeys.AlreadyHaveAnAccount),
                             style:
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
                           ),
                           GestureDetector(
                             onTap: widget.press,
                             child: Text(
-                              " Đăng nhập ngay",
+                              tr(LocaleKeys.SignInNow),
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
