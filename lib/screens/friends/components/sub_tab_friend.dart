@@ -5,7 +5,7 @@ import 'package:mock_chat/enums.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/color_provider.dart';
-import '../../../provider/friend_tab_provider';
+import '../../../provider/friend_tab_provider.dart';
 
 class SubTabFriend extends StatelessWidget {
   const SubTabFriend({

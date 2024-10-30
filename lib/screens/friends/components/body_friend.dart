@@ -6,7 +6,7 @@ import 'package:mock_chat/screens/friends/components/request.dart';
 import 'package:mock_chat/screens/friends/components/sub_tab_friend.dart';
 import 'package:provider/provider.dart';
 
-import '../../../provider/friend_tab_provider';
+import '../../../provider/friend_tab_provider.dart';
 
 class BodyFriend extends StatefulWidget {
   const BodyFriend({super.key});

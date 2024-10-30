@@ -96,9 +96,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Navigator.pop(context);
 
     if (result != null) {
-      displayMessageToUser(result, context);
+      if (mounted) {
+        displayMessageToUser(result, context);
+      }
     } else {
-      // Navigator.pushNamed(context, '/body_change');@gma
+      if (mounted) {
+        Navigator.pushNamed(context, '/body_change');
+      }
     }
   }
 

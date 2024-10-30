@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mock_chat/auth/auth_page.dart';
-import 'package:mock_chat/provider/friend_tab_provider';
+import 'package:mock_chat/provider/friend_tab_provider.dart';
 import 'package:mock_chat/provider/tab_provider.dart';
 import 'package:mock_chat/provider/user_provider.dart';
 import 'package:mock_chat/screens/body_change.dart';
@@ -36,9 +36,9 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider<ColorProvider>(create: (_) => ColorProvider()),
           ChangeNotifierProvider<TabProvider>(create: (_) => TabProvider()),
+          ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
           ChangeNotifierProvider<FriendTabProvider>(
               create: (_) => FriendTabProvider()),
-          ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ],
         child: MyApp(),
       ),
