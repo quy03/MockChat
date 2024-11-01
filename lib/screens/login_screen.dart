@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mock_chat/components/my_textfield.dart';
+import 'package:mock_chat/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
@@ -10,10 +12,10 @@ import '../core/locale_keys.dart';
 import '../helper/helper_fuction.dart';
 
 class LoginScreen extends StatefulWidget {
-  final Function()? press;
+  final VoidCallback onSwitch;
   const LoginScreen({
     super.key,
-    this.press,
+    required this.onSwitch,
   });
 
   @override
@@ -28,12 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   // giải phóng dữ liệu không cần thiết
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
 
   // Hàm kiểm tra tính hợp lệ của email
   String? _validateEmail(String email) {
@@ -81,12 +83,12 @@ class _LoginScreenState extends State<LoginScreen> {
       password: passwordController.text,
     );
 
-    Navigator.pop(context);
+    if (mounted) Navigator.pop(context);
 
     if (result != null) {
       displayMessageToUser(result, context);
     } else {
-      // Navigator.pushNamed(context, '/body_change');
+      Provider.of<UserProvider>(context, listen: false).refreshUser();
     }
   }
 
@@ -188,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
                           ),
                           GestureDetector(
-                            onTap: widget.press,
+                            onTap: widget.onSwitch,
                             child: Text(
                               tr(LocaleKeys.SignUpNow),
                               style: TextStyle(

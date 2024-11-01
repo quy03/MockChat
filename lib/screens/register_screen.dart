@@ -1,16 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mock_chat/screens/login_screen.dart';
 import '../auth/auth_methods.dart';
-import '../auth/auth_page.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 import '../core/locale_keys.dart';
 import '../helper/helper_fuction.dart';
 
 class RegisterScreen extends StatefulWidget {
-  final Function()? press;
-  const RegisterScreen({super.key, this.press});
+  final VoidCallback onSwitch;
+  const RegisterScreen({
+    super.key,
+    required this.onSwitch,
+  });
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -55,7 +58,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return null;
   }
 
-  // Hàm đăng ký người dùng
   Future<void> registerUser() async {
     final emailError = _validateEmail(emailController.text);
     final passwordError = _validatePassword(passwordController.text);
@@ -82,32 +84,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       displayMessageToUser(checkBox!, context);
       return;
     }
-
-    showDialog(
-      context: context,
-      builder: (context) => Center(child: CircularProgressIndicator()),
-    );
+    print(mounted);
 
     final result = await _authMethods.registerUser(
       email: emailController.text,
       password: passwordController.text,
       fullname: fullnameController.text,
     );
-// Kiểm tra giá trị của result
-    print('Registration result: $result');
-    print('Registration result: $mounted');
-    if (mounted) Navigator.pop(context);
 
     if (result != null) {
-      if (mounted) {
-        displayMessageToUser(result, context);
-      }
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => AuthPage()),
-        );
-      }
+      displayMessageToUser(result, context);
     }
   }
 
@@ -131,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       SizedBox(height: size.height / 20),
                       GestureDetector(
-                        onTap: widget.press,
+                        onTap: widget.onSwitch,
                         child: SvgPicture.asset(
                           "assets/icons/backward-arrow.svg",
                           height: 24,
@@ -219,12 +205,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             TextSpan(
                               children: [
                                 TextSpan(
-                                  text: tr(LocaleKeys.IagreeToThe) + " ",
+                                  text: "${tr(LocaleKeys.IagreeToThe)} ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
                                 TextSpan(
-                                  text: tr(LocaleKeys.Policies) + " ",
+                                  text: "${tr(LocaleKeys.Policies)} ",
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.secondary,
@@ -232,7 +218,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: tr(LocaleKeys.And) + " ",
+                                  text: "${tr(LocaleKeys.And)} ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
@@ -272,7 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
                           ),
                           GestureDetector(
-                            onTap: widget.press,
+                            onTap: widget.onSwitch,
                             child: Text(
                               tr(LocaleKeys.SignInNow),
                               style: TextStyle(

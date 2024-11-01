@@ -15,7 +15,7 @@ class AuthMethods {
   }) async {
     try {
       // Đăng ký người dùng với Firebase Authentication
-      UserCredential userCredential =
+      UserCredential? userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -33,7 +33,7 @@ class AuthMethods {
           .doc(userCredential.user!.uid)
           .set(userData.toJson());
 
-      return "Đăng ký thành công";
+      return null;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'email-already-in-use':

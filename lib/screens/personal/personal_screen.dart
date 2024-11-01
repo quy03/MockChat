@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/auth/auth_page.dart';
 import 'package:mock_chat/contants.dart';
 import 'package:mock_chat/screens/personal/components/information_section.dart';
 import 'package:mock_chat/screens/personal/components/personal_edit.dart';
@@ -21,20 +22,30 @@ class PersonalScreen extends StatefulWidget {
 class _PersonalScreenState extends State<PersonalScreen> {
   late UserProvider userProvider;
 
+  Future<void> updateData() async {
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+    await userProvider.refreshUser();
+    if (mounted) setState(() {});
+  }
+
   @override
   // Sử dụng Provider để lấy đối tượng UserProvider.
   void initState() {
     super.initState();
-    userProvider = Provider.of<UserProvider>(context, listen: false);
-    updateData();
-  }
 
-  Future<void> updateData() async {
-    await userProvider.refreshUser();
+    updateData();
   }
 
   void logout() async {
     await FirebaseAuth.instance.signOut();
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AuthPage(),
+        ),
+      );
+    }
   }
 
   @override

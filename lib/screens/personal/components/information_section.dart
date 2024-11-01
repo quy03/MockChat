@@ -20,7 +20,7 @@ class ImformationSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 12),
       child: Column(
         children: [
-          SizedBox(height: 15),
+          SizedBox(height: 20),
           // Ngôn ngữ
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +98,7 @@ class ImformationSection extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 20),
                     Container(
                       height: 1,
                       color: Color.fromRGBO(239, 238, 238, 1),
@@ -108,7 +108,7 @@ class ImformationSection extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 20),
 
           // Thông báo
           Row(
@@ -134,7 +134,7 @@ class ImformationSection extends StatelessWidget {
                         SvgPicture.asset("assets/icons/right arrow.svg"),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 20),
                     Container(
                       height: 1,
                       color: Color.fromRGBO(239, 238, 238, 1),
@@ -144,7 +144,7 @@ class ImformationSection extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 20),
 
           // Phiên bản ứng dụng
           Row(

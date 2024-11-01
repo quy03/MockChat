@@ -60,11 +60,11 @@ class MyApp extends StatelessWidget {
       theme: theme,
       home: const AuthPage(),
       routes: {
-        '/login_screen': (context) => const LoginScreen(),
-        '/register_screen': (context) => const RegisterScreen(),
-        '/message_screen': (context) => const MessageScreen(),
-        '/friend_screen': (context) => FriendScreen(),
-        '/body_change': (context) => const BodyChange(),
+        // '/login_screen': (context) => const LoginScreen(),
+        // '/register_screen': (context) => const RegisterScreen(),
+        // '/message_screen': (context) => const MessageScreen(),
+        // '/friend_screen': (context) => FriendScreen(),
+        // '/body_change': (context) => const BodyChange(),
       },
     );
   }

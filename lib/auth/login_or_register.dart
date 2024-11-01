@@ -10,21 +10,25 @@ class LoginOrRegister extends StatefulWidget {
 }
 
 class _LoginOrRegisterState extends State<LoginOrRegister> {
-  bool showLoginScreen = true;
+  int currentIndex = 0;
 
   // chuyển đổi màn hình
   void toggleScreens() {
     setState(() {
-      showLoginScreen = !showLoginScreen;
+      currentIndex = (currentIndex == 0) ? 1 : 0;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (showLoginScreen) {
-      return LoginScreen(press: toggleScreens);
-    } else {
-      return RegisterScreen(press: toggleScreens);
-    }
+    return Scaffold(
+      body: IndexedStack(
+        index: currentIndex,
+        children: [
+          LoginScreen(onSwitch: toggleScreens),
+          RegisterScreen(onSwitch: toggleScreens),
+        ],
+      ),
+    );
   }
 }
