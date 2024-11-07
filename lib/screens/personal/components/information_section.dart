@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../contants.dart';
 import '../../../core/app_localizations.dart';
 import '../../../core/locale_keys.dart';
+import '../../../provider/language_provider.dart';
 
 class ImformationSection extends StatelessWidget {
   const ImformationSection({
@@ -45,6 +47,7 @@ class ImformationSection extends StatelessWidget {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
+                              isScrollControlled: true,
                               builder: (BuildContext context) {
                                 return SizedBox(
                                   height: 150,
@@ -55,8 +58,10 @@ class ImformationSection extends StatelessWidget {
                                         title: Text('English'),
                                         onTap: () {
                                           context.setLocale(
-                                            AppLocalizations.engLocale,
-                                          );
+                                              AppLocalizations.engLocale);
+                                          Provider.of<LanguageProvider>(context,
+                                                  listen: false)
+                                              .changeLanguage('en');
                                           Navigator.pop(context);
                                         },
                                       ),
@@ -65,8 +70,10 @@ class ImformationSection extends StatelessWidget {
                                         title: Text('Tiếng Việt'),
                                         onTap: () {
                                           context.setLocale(
-                                            AppLocalizations.viLocale,
-                                          );
+                                              AppLocalizations.viLocale);
+                                          Provider.of<LanguageProvider>(context,
+                                                  listen: false)
+                                              .changeLanguage('vi');
                                           Navigator.pop(context);
                                         },
                                       ),

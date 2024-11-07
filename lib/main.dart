@@ -1,21 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mock_chat/auth/auth_page.dart';
-import 'package:mock_chat/provider/friend_tab_provider.dart';
-import 'package:mock_chat/provider/tab_provider.dart';
-import 'package:mock_chat/provider/user_provider.dart';
-import 'package:mock_chat/screens/body_change.dart';
-import 'package:mock_chat/screens/friends/friend_screen.dart';
-import 'package:mock_chat/screens/login_screen.dart';
-import 'package:mock_chat/screens/message/message_screen.dart';
-import 'package:mock_chat/screens/register_screen.dart';
-import 'package:mock_chat/theme/theme.dart';
-import 'core/app_localizations.dart';
-import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
+import 'auth/auth_page.dart';
+import 'core/app_localizations.dart';
+import 'firebase_options.dart';
 import 'provider/color_provider.dart';
+import 'provider/friend_tab_provider.dart';
+import 'provider/language_provider.dart';
+import 'provider/tab_provider.dart';
+import 'provider/user_provider.dart';
+import 'theme/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,21 +47,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: theme,
-      home: const AuthPage(),
-      routes: {
-        // '/login_screen': (context) => const LoginScreen(),
-        // '/register_screen': (context) => const RegisterScreen(),
-        // '/message_screen': (context) => const MessageScreen(),
-        // '/friend_screen': (context) => FriendScreen(),
-        // '/body_change': (context) => const BodyChange(),
-      },
+    return ChangeNotifierProvider(
+      create: (_) => LanguageProvider(),
+      child: Consumer<LanguageProvider>(
+        builder: (context, languageProvider, child) => MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: languageProvider.locale,
+          debugShowCheckedModeBanner: false,
+          theme: theme,
+          title: 'Flutter Demo',
+          home: const AuthPage(),
+        ),
+      ),
     );
   }
 }

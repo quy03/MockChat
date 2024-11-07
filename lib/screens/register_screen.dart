@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mock_chat/screens/login_screen.dart';
 import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';

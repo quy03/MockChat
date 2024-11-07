@@ -36,13 +36,6 @@ class _BodyChangeState extends State<BodyChange> {
 
     return SafeArea(
       child: Scaffold(
-        // appBar: PreferredSize(
-        //   preferredSize: const Size.fromHeight(0),
-        //   child: AppBar(
-        //     backgroundColor: Theme.of(context).colorScheme.secondary,
-        //     elevation: 0,
-        //   ),
-        // ),
         body: IndexedStack(
           index: tabProvider.selectedIndex,
           children: _pages,
