@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mock_chat/core/locale_keys.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/message/components/list_friends.dart';
 
 import '../../../components/secondary_screen_appbar.dart';
+import '../../../localization/app_localization.dart';
 
 class CreateNewMessage extends StatelessWidget {
   const CreateNewMessage({super.key});
@@ -37,10 +36,11 @@ class CreateNewMessage extends StatelessWidget {
                   color: Color.fromRGBO(255, 255, 255, 1),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 12,
                   ),
-                  child: _buildListFriends(size),
+                  child: _buildListFriends(
+                      context, size), // Truyền context vào đây
                 ),
               ),
             ),
@@ -50,16 +50,16 @@ class CreateNewMessage extends StatelessWidget {
     );
   }
 
-  Column _buildListFriends(Size size) {
+  Column _buildListFriends(BuildContext context, Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Text(
-          tr(LocaleKeys.FriendsList),
-          style: TextStyle(
+          AppLocalization.of(context)!.translate('FriendsList'),
+          style: const TextStyle(
             color: Color.fromRGBO(153, 153, 153, 1),
             fontSize: 14,
             fontWeight: FontWeight.w800,

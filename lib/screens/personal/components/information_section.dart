@@ -1,12 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../contants.dart';
-import '../../../core/app_localizations.dart';
-import '../../../core/locale_keys.dart';
-import '../../../provider/language_provider.dart';
+import '../../../data/default_data.dart';
+import '../../../localization/app_localization.dart';
+import '../../../provider/current_data.dart';
 
 class ImformationSection extends StatelessWidget {
   const ImformationSection({
@@ -18,179 +17,99 @@ class ImformationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12),
+    final DefaultData defaultData = DefaultData();
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      height: 180,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(height: 20),
           // Ngôn ngữ
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset("assets/icons/global.svg"),
-              SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          tr(LocaleKeys.Language),
-                          style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (BuildContext context) {
-                                return SizedBox(
-                                  height: 150,
-                                  child: Column(
-                                    children: [
-                                      ListTile(
-                                        leading: Icon(Icons.language),
-                                        title: Text('English'),
-                                        onTap: () {
-                                          context.setLocale(
-                                              AppLocalizations.engLocale);
-                                          Provider.of<LanguageProvider>(context,
-                                                  listen: false)
-                                              .changeLanguage('en');
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: Icon(Icons.language),
-                                        title: Text('Tiếng Việt'),
-                                        onTap: () {
-                                          context.setLocale(
-                                              AppLocalizations.viLocale);
-                                          Provider.of<LanguageProvider>(context,
-                                                  listen: false)
-                                              .changeLanguage('vi');
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                context.locale == AppLocalizations.engLocale
-                                    ? "English"
-                                    : "Tiếng Việt",
-                                style: TextStyle(
-                                  color: kSecondaryColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              SizedBox(width: 20),
-                              GestureDetector(
-                                child: SvgPicture.asset(
-                                    "assets/icons/right arrow.svg"),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-                      height: 1,
-                      color: Color.fromRGBO(239, 238, 238, 1),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          _buildRow(
+            context,
+            iconPath: "assets/icons/global.svg",
+            label: AppLocalization.of(context)!.translate('Language'),
+            trailingWidget: Consumer<CurrentData>(
+              builder: (BuildContext context, CurrentData currentData,
+                  Widget? child) {
+                return DropdownButton<String>(
+                  value: currentData.currentLanguage,
+                  icon: SvgPicture.asset("assets/icons/right arrow.svg"),
+                  iconSize: 20,
+                  elevation: 0,
+                  style: const TextStyle(
+                    color: kSecondaryColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  dropdownColor: kInversePrimaryColor,
+                  underline: SizedBox(),
+                  items: defaultData.languageListDefault
+                      .map<DropdownMenuItem<String>>(
+                    (String value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Text(value),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: (String? value) {
+                    currentData.changLocale(value!);
+                  },
+                );
+              },
+            ),
           ),
-          SizedBox(height: 20),
+          Divider(color: Color.fromRGBO(239, 238, 238, 1)),
 
           // Thông báo
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset("assets/icons/megaphone.svg"),
-              SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          tr(LocaleKeys.Notifications),
-                          style: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 1),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Spacer(),
-                        SizedBox(width: 20),
-                        SvgPicture.asset("assets/icons/right arrow.svg"),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-                      height: 1,
-                      color: Color.fromRGBO(239, 238, 238, 1),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          _buildRow(
+            context,
+            iconPath: "assets/icons/megaphone.svg",
+            label: AppLocalization.of(context)!.translate('Notifications'),
+            trailingWidget: SvgPicture.asset("assets/icons/right arrow.svg"),
           ),
-          SizedBox(height: 20),
+          Divider(color: Color.fromRGBO(239, 238, 238, 1)),
 
           // Phiên bản ứng dụng
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset("assets/icons/reuse.svg"),
-              SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          tr(LocaleKeys.Version),
-                          style: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 1),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          "1.0.0",
-                          style: TextStyle(
-                            color: Color.fromRGBO(153, 153, 153, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: size.height / 30),
-                  ],
-                ),
+          _buildRow(
+            context,
+            iconPath: "assets/icons/reuse.svg",
+            label: AppLocalization.of(context)!.translate('Version'),
+            trailingWidget: Text(
+              "1.0.0",
+              style: const TextStyle(
+                color: Color.fromRGBO(153, 153, 153, 1),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
-            ],
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildRow(BuildContext context,
+      {required String iconPath,
+      required String label,
+      required Widget trailingWidget}) {
+    return Row(
+      children: [
+        SvgPicture.asset(iconPath),
+        const SizedBox(width: 20),
+        Expanded(
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: kPrimaryColor,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        trailingWidget,
+      ],
     );
   }
 }

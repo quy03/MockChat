@@ -1,8 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/contants.dart';
-import 'package:mock_chat/core/locale_keys.dart';
+import 'package:mock_chat/localization/app_localization.dart';
 
 import '../../../components/my_textfield.dart';
 
@@ -53,7 +52,8 @@ class _PersonalEditState extends State<PersonalEdit> {
                           ),
                         ),
                         Text(
-                          tr(LocaleKeys.ChangeInformation),
+                          AppLocalization.of(context)!
+                              .translate("ChangeInformation"),
                           style: TextStyle(
                             color: kPrimaryLightColor,
                             fontSize: 18,
@@ -63,7 +63,7 @@ class _PersonalEditState extends State<PersonalEdit> {
                         GestureDetector(
                           onTap: () {},
                           child: Text(
-                            tr(LocaleKeys.Save),
+                            AppLocalization.of(context)!.translate("Save"),
                             style: TextStyle(
                               color: kPrimaryLightColor,
                               fontSize: 16,
@@ -137,24 +137,30 @@ class _PersonalEditState extends State<PersonalEdit> {
                       SizedBox(height: size.height / 20),
                       MyTextField(
                         svgIcon: 'assets/icons/user.svg',
-                        labelText: tr(LocaleKeys.FullName),
-                        hintText: tr(LocaleKeys.EnterYourFullName),
+                        labelText:
+                            AppLocalization.of(context)!.translate("FullName"),
+                        hintText: AppLocalization.of(context)!
+                            .translate("EnterYourFullName"),
                         obscureText: false,
                         controller: fullnameController,
                       ),
                       SizedBox(height: size.height / 30),
                       MyTextField(
                         svgIcon: 'assets/icons/telephone.svg',
-                        labelText: tr(LocaleKeys.PhoneNumber),
-                        hintText: tr(LocaleKeys.EnterYourPhoneNumber),
+                        labelText: AppLocalization.of(context)!
+                            .translate('PhoneNumber'),
+                        hintText: AppLocalization.of(context)!
+                            .translate('EnterYourPhoneNumber'),
                         obscureText: false,
                         controller: phonenumberController,
                       ),
                       SizedBox(height: size.height / 30),
                       MyTextField(
                         svgIcon: 'assets/icons/birthday-cake.svg',
-                        labelText: tr(LocaleKeys.DateOfBirth),
-                        hintText: tr(LocaleKeys.EnterYourDateOfBirth),
+                        labelText: AppLocalization.of(context)!
+                            .translate('DateOfBirth'),
+                        hintText: AppLocalization.of(context)!
+                            .translate('EnterYourDateOfBirth'),
                         obscureText: false,
                         controller: fullnameController,
                       ),

@@ -1,9 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/contants.dart';
-import 'package:mock_chat/core/locale_keys.dart';
+
+import '../localization/app_localization.dart';
 
 class MySearch extends StatefulWidget {
   // ignore: use_super_parameters
@@ -78,7 +77,7 @@ class _MySearchState extends State<MySearch> {
               FocusScope.of(context).unfocus();
             },
             child: Text(
-              tr(LocaleKeys.Cancel),
+              AppLocalization.of(context)!.translate('Cancel'),
               style: TextStyle(
                 color: Theme.of(context).colorScheme.surface,
                 fontSize: 16,

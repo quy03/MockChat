@@ -1,8 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/contants.dart';
-import 'package:mock_chat/core/locale_keys.dart';
+import 'package:mock_chat/localization/app_localization.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/friends/components/body_friend.dart';
 import 'package:mock_chat/screens/friends/components/friend_search.dart';
@@ -41,8 +40,9 @@ class _FriendScreenState extends State<FriendScreen> {
               child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
-                text: tr(LocaleKeys.Friends),
-                hintText: tr(LocaleKeys.SearchFriends),
+                text: AppLocalization.of(context)!.translate('Friends'),
+                hintText:
+                    AppLocalization.of(context)!.translate('SearchFriends'),
                 push: GestureDetector(
                   onTap: () {
                     // Navigator.push(
@@ -88,7 +88,7 @@ class _FriendScreenState extends State<FriendScreen> {
         Padding(
           padding: EdgeInsets.only(left: size.width / 30),
           child: Text(
-            tr(LocaleKeys.Friends),
+            AppLocalization.of(context)!.translate('Friends'),
             style: TextStyle(
               color: kInversePrimaryColor,
               fontSize: 14,

@@ -1,15 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import 'package:mock_chat/components/my_textfield.dart';
 import 'package:mock_chat/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
-import '../core/locale_keys.dart';
 import '../helper/helper_fuction.dart';
+import '../localization/app_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onSwitch;
@@ -119,12 +116,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       // Text app name
                       Text(
-                        tr(LocaleKeys.Experience),
+                        AppLocalization.of(context)!.translate('Experience'),
                         style: TextStyle(fontSize: 26),
                       ),
                       // Text đăng nhập
                       Text(
-                        tr(LocaleKeys.Login),
+                        AppLocalization.of(context)!.translate('Login'),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 32,
@@ -137,7 +134,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       MyTextField(
                         svgIcon: 'assets/icons/mail.svg',
                         labelText: 'EMAIL',
-                        hintText: tr(LocaleKeys.EnterYourEmail),
+                        hintText: AppLocalization.of(context)!
+                            .translate('EnterYourEmail'),
                         obscureText: false,
                         controller: emailController,
                       ),
@@ -146,8 +144,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       // password textfield
                       MyTextField(
                         svgIcon: 'assets/icons/key.svg',
-                        labelText: tr(LocaleKeys.Password),
-                        hintText: tr(LocaleKeys.EnterYourPassword),
+                        labelText:
+                            AppLocalization.of(context)!.translate('Password'),
+                        hintText: AppLocalization.of(context)!
+                            .translate('EnterYourPassword'),
                         obscureText: true,
                         controller: passwordController,
                       ),
@@ -158,7 +158,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            tr(LocaleKeys.ForgotYourPassword),
+                            AppLocalization.of(context)!
+                                .translate('ForgotYourPassword'),
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.bold,
@@ -175,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       // nút đăng nhập
                       MyButton(
-                        text: tr(LocaleKeys.Login),
+                        text: AppLocalization.of(context)!.translate('Login'),
                         onTap: loginUser,
                       ),
                       SizedBox(height: size.height / 10),
@@ -185,14 +186,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            tr(LocaleKeys.DoNotHaveAnAccount),
+                            AppLocalization.of(context)!
+                                .translate('DoNotHaveAnAccount'),
                             style:
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
                           ),
                           GestureDetector(
                             onTap: widget.onSwitch,
                             child: Text(
-                              tr(LocaleKeys.SignUpNow),
+                              AppLocalization.of(context)!
+                                  .translate('SignUpNow'),
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.bold,

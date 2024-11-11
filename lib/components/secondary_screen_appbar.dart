@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/components/my_search.dart';
+import 'package:mock_chat/localization/app_localization.dart';
 
 import '../contants.dart';
-import '../core/locale_keys.dart';
 
 class SecondaryScreenAppbar extends StatelessWidget {
   const SecondaryScreenAppbar({super.key});
@@ -37,7 +36,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
                 ),
               ),
               Text(
-                tr(LocaleKeys.CreateMessage),
+                AppLocalization.of(context)!.translate('CreateMessage'),
                 style: TextStyle(
                   color: kPrimaryLightColor,
                   fontSize: 18,
@@ -46,7 +45,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Text(
-                  tr(LocaleKeys.Cancel),
+                  AppLocalization.of(context)!.translate('Cancel'),
                   style: TextStyle(
                     color: kPrimaryLightColor,
                     fontSize: 16,
@@ -59,7 +58,8 @@ class SecondaryScreenAppbar extends StatelessWidget {
           GestureDetector(
             onTap: () => {},
             child: MySearch(
-              hintText: tr(LocaleKeys.SearchMessages),
+              hintText:
+                  AppLocalization.of(context)!.translate('SearchMessages'),
               onSearchToggleMySearch: (value) => {},
             ),
           ),

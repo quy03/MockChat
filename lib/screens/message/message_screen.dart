@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mock_chat/components/primary_screen_appbar.dart';
@@ -8,7 +7,7 @@ import 'package:mock_chat/screens/message/components/message_details.dart';
 import 'package:mock_chat/screens/message/components/message_list.dart';
 import 'package:mock_chat/screens/message/components/mesage_search.dart';
 
-import '../../core/locale_keys.dart';
+import '../../localization/app_localization.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -43,8 +42,9 @@ class _MessageScreenState extends State<MessageScreen> {
               child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
-                text: tr(LocaleKeys.Messages),
-                hintText: tr(LocaleKeys.SearchMessages),
+                text: AppLocalization.of(context)!.translate('Messages'),
+                hintText:
+                    AppLocalization.of(context)!.translate('SearchMessages'),
                 push: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -94,7 +94,7 @@ class _MessageScreenState extends State<MessageScreen> {
       children: [
         SizedBox(height: 10),
         Text(
-          tr(LocaleKeys.Messages),
+          AppLocalization.of(context)!.translate('Messages'),
           style: TextStyle(
             color: Theme.of(context).colorScheme.inversePrimary,
             fontSize: 14,

@@ -1,15 +1,16 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mock_chat/auth/auth_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mock_chat/contants.dart';
+import 'package:mock_chat/models/userdata.dart';
 import 'package:mock_chat/screens/personal/components/information_section.dart';
 import 'package:mock_chat/screens/personal/components/personal_edit.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../core/locale_keys.dart';
-import '../../models/userdata.dart';
+import '../../auth/auth_page.dart';
+import '../../localization/app_localization.dart';
 import '../../provider/user_provider.dart';
 
 class PersonalScreen extends StatefulWidget {
@@ -29,10 +30,8 @@ class _PersonalScreenState extends State<PersonalScreen> {
   }
 
   @override
-  // Sử dụng Provider để lấy đối tượng UserProvider.
   void initState() {
     super.initState();
-
     updateData();
   }
 
@@ -42,7 +41,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => AuthPage(),
+          builder: (context) => const AuthPage(),
         ),
       );
     }
@@ -50,8 +49,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserData? userData =
-        userProvider.getUser; // Lấy thông tin người dùng từ provider
+    UserData? userData = userProvider.getUser;
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -85,6 +83,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                       color: kPrimaryLightColor,
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(height: 10),
                         Padding(
@@ -137,7 +136,6 @@ class _PersonalScreenState extends State<PersonalScreen> {
                                   "assets/icons/edit.svg",
                                   height: 16,
                                   width: 16,
-                                  // ignore: deprecated_member_use
                                   color: kSecondaryColor,
                                 ),
                               ),
@@ -157,21 +155,29 @@ class _PersonalScreenState extends State<PersonalScreen> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: GestureDetector(
-                              onTap: logout,
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset("assets/icons/logout.svg"),
-                                  const SizedBox(width: 20),
-                                  Text(
-                                    tr(LocaleKeys.LogOut),
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      color: Color.fromRGBO(201, 35, 35, 1),
-                                    ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Cột Ngôn ngữ, Thông báo, Phiên bản, Đăng xuất
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/icons/logout.svg"),
+                                      const SizedBox(width: 20),
+                                      Text(
+                                        AppLocalization.of(context)!
+                                            .translate('LogOut'),
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Color.fromRGBO(201, 35, 35, 1),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

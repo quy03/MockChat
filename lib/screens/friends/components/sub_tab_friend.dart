@@ -1,9 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mock_chat/core/locale_keys.dart';
 import 'package:mock_chat/enums.dart';
 import 'package:provider/provider.dart';
 
+import '../../../localization/app_localization.dart';
 import '../../../provider/color_provider.dart';
 import '../../../provider/friend_tab_provider.dart';
 
@@ -36,7 +35,7 @@ class SubTabFriend extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    tr(LocaleKeys.Friends),
+                    AppLocalization.of(context)!.translate('Friends'),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedFriend == FriendState.friends
@@ -56,7 +55,7 @@ class SubTabFriend extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    tr(LocaleKeys.All),
+                    AppLocalization.of(context)!.translate('All'),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedFriend == FriendState.all
@@ -78,7 +77,7 @@ class SubTabFriend extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        tr(LocaleKeys.Requests),
+                        AppLocalization.of(context)!.translate('Requests'),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: selectedFriend == FriendState.request

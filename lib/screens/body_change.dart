@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mock_chat/screens/friends/friend_screen.dart';
 import 'package:mock_chat/screens/message/message_screen.dart';
 import 'package:mock_chat/screens/personal/personal_screen.dart';
@@ -33,9 +34,14 @@ class _BodyChangeState extends State<BodyChange> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final tabProvider = Provider.of<TabProvider>(context);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.blue, // Đặt thành trong suốt
+      statusBarIconBrightness: Brightness.dark, // Hoặc chỉnh màu của biểu tượng
+    ));
 
     return SafeArea(
       child: Scaffold(
+        appBar: null,
         body: IndexedStack(
           index: tabProvider.selectedIndex,
           children: _pages,

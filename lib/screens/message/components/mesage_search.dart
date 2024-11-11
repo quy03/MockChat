@@ -1,8 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mock_chat/core/locale_keys.dart';
-
 import '../../../contants.dart';
+import '../../../localization/app_localization.dart';
 
 class MessageSearch extends StatelessWidget {
   const MessageSearch({
@@ -45,7 +43,7 @@ class MessageSearch extends StatelessWidget {
                     style: styleBody,
                   ),
                   Text(
-                    tr(LocaleKeys.MatchingMessages),
+                    AppLocalization.of(context)!.translate('MatchingMessages'),
                     style: TextStyle(
                       color: Colors.grey,
                       // 0,0,0,1       153,153,153,1

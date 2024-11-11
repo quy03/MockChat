@@ -1,7 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mock_chat/core/locale_keys.dart';
+import 'package:mock_chat/localization/app_localization.dart';
 import 'package:mock_chat/provider/tab_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -77,7 +77,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 ],
               ),
               Text(
-                tr(LocaleKeys.Messages),
+                AppLocalization.of(context)!.translate('Messages'),
                 style: TextStyle(
                   color: MenuState.message == selectedMenu
                       ? iconColorProvider.selectedColor
@@ -105,7 +105,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 28,
               ),
               Text(
-                tr(LocaleKeys.Friends),
+                AppLocalization.of(context)!.translate('Friends'),
                 style: TextStyle(
                   color: MenuState.friend == selectedMenu
                       ? iconColorProvider.selectedColor
@@ -133,7 +133,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 28,
               ),
               Text(
-                tr(LocaleKeys.Profile),
+                AppLocalization.of(context)!.translate('Profile'),
                 style: TextStyle(
                   color: MenuState.personal == selectedMenu
                       ? iconColorProvider.selectedColor
