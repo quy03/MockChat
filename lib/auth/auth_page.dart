@@ -11,20 +11,23 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder(
-        // theo dõi trạng thái đăng nhập
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Provider.of<TabProvider>(context, listen: false).resetIndex();
-            });
-            return BodyChange();
-          } else {
-            return LoginOrRegister();
-          }
-        },
+    return ChangeNotifierProvider(
+      create: (_) => TabProvider(),
+      child: Scaffold(
+        body: StreamBuilder(
+          // theo dõi trạng thái đăng nhập
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Provider.of<TabProvider>(context, listen: false).resetIndex();
+              });
+              return BodyChange();
+            } else {
+              return LoginOrRegister();
+            }
+          },
+        ),
       ),
     );
   }

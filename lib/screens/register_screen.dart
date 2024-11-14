@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../auth/auth_methods.dart';
@@ -83,7 +82,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       displayMessageToUser(checkBox!, context);
       return;
     }
-    print(mounted);
 
     final result = await _authMethods.registerUser(
       email: emailController.text,
@@ -126,8 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(height: size.height / 20),
                       // text đăng ký
                       Text(
-                        AppLocalization.of(context)!
-                                        .translate('SignUp'),
+                        AppLocalization.of(context)!.translate('SignUp'),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 32,
@@ -138,10 +135,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // fullname textfield
                       MyTextField(
                         svgIcon: 'assets/icons/user.svg',
-                        labelText: AppLocalization.of(context)!
-                                        .translate('FullName'),
+                        labelText:
+                            AppLocalization.of(context)!.translate('FullName'),
                         hintText: AppLocalization.of(context)!
-                                        .translate('EnterYourFullName'),
+                            .translate('EnterYourFullName'),
                         obscureText: false,
                         controller: fullnameController,
                       ),
@@ -152,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         svgIcon: 'assets/icons/mail.svg',
                         labelText: 'EMAIL',
                         hintText: AppLocalization.of(context)!
-                                        .translate('EnterYourEmail'),
+                            .translate('EnterYourEmail'),
                         obscureText: false,
                         controller: emailController,
                       ),
@@ -161,10 +158,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // password textfield
                       MyTextField(
                         svgIcon: 'assets/icons/key.svg',
-                        labelText: AppLocalization.of(context)!
-                                        .translate('Password'),
+                        labelText:
+                            AppLocalization.of(context)!.translate('Password'),
                         hintText: AppLocalization.of(context)!
-                                        .translate('EnterYourPassword'),
+                            .translate('EnterYourPassword'),
                         obscureText: true,
                         controller: passwordController,
                       ),
@@ -210,14 +207,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             TextSpan(
                               children: [
                                 TextSpan(
-                                  text: "${AppLocalization.of(context)!
-                                        .translate('IagreeToThe')} ",
+                                  text:
+                                      "${AppLocalization.of(context)!.translate('IagreeToThe')} ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
                                 TextSpan(
-                                  text: "${AppLocalization.of(context)!
-                                        .translate('Policies')} ",
+                                  text:
+                                      "${AppLocalization.of(context)!.translate('Policies')} ",
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.secondary,
@@ -225,14 +222,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: "${AppLocalization.of(context)!
-                                        .translate('And')} ",
+                                  text:
+                                      "${AppLocalization.of(context)!.translate('And')} ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
                                 TextSpan(
                                   text: AppLocalization.of(context)!
-                                        .translate('Terms'),
+                                      .translate('Terms'),
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.secondary,
@@ -252,8 +249,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       // nút đăng ký
                       MyButton(
-                        text: AppLocalization.of(context)!
-                                        .translate('SignUp'),
+                        text: AppLocalization.of(context)!.translate('SignUp'),
                         onTap: registerUser,
                       ),
                       SizedBox(height: size.height / 10),
@@ -264,7 +260,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Text(
                             AppLocalization.of(context)!
-                                        .translate('AlreadyHaveAnAccount'),
+                                .translate('AlreadyHaveAnAccount'),
                             style:
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
                           ),
@@ -272,7 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onTap: widget.onSwitch,
                             child: Text(
                               AppLocalization.of(context)!
-                                        .translate('SignInNow'),
+                                  .translate('SignInNow'),
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.bold,

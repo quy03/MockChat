@@ -35,8 +35,8 @@ class _BodyChangeState extends State<BodyChange> {
     Size size = MediaQuery.of(context).size;
     final tabProvider = Provider.of<TabProvider>(context);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.blue, // Đặt thành trong suốt
-      statusBarIconBrightness: Brightness.dark, // Hoặc chỉnh màu của biểu tượng
+      statusBarColor: Colors.blue,
+      statusBarIconBrightness: Brightness.dark,
     ));
 
     return SafeArea(

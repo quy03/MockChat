@@ -1,15 +1,15 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mock_chat/auth/auth_page.dart';
+import 'package:mock_chat/provider/color_provider.dart';
+import 'package:mock_chat/provider/tab_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 import 'localization/app_localization.dart';
-import 'provider/color_provider.dart';
 import 'provider/current_data.dart';
-import 'provider/friend_tab_provider.dart';
-import 'provider/tab_provider.dart';
 import 'provider/user_provider.dart';
 import 'theme/theme.dart';
 
@@ -18,14 +18,14 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // Kích hoạt chế độ offline cho Realtime Database
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<ColorProvider>(create: (_) => ColorProvider()),
         ChangeNotifierProvider<TabProvider>(create: (_) => TabProvider()),
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
-        ChangeNotifierProvider<FriendTabProvider>(
-            create: (_) => FriendTabProvider()),
         ChangeNotifierProvider<CurrentData>(create: (_) => CurrentData()),
       ],
       child: MyApp(),

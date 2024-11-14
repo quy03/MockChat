@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mock_chat/enums.dart';
+import 'package:mock_chat/provider/friend_tab_provider.dart';
 import 'package:mock_chat/screens/friends/components/all.dart';
 import 'package:mock_chat/screens/friends/components/friends.dart';
 import 'package:mock_chat/screens/friends/components/request.dart';
 import 'package:mock_chat/screens/friends/components/sub_tab_friend.dart';
 import 'package:provider/provider.dart';
-
-import '../../../provider/friend_tab_provider.dart';
 
 class BodyFriend extends StatefulWidget {
   const BodyFriend({super.key});
@@ -16,13 +15,6 @@ class BodyFriend extends StatefulWidget {
 }
 
 class _BodyFriendState extends State<BodyFriend> {
-  // int _selectedIndex = 0;
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
-
   final List<Widget> _pages = [
     Friends(),
     All(),
@@ -32,22 +24,33 @@ class _BodyFriendState extends State<BodyFriend> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final friendTabProvider = Provider.of<FriendTabProvider>(context);
 
-    return Column(
-      children: [
-        SubTabFriend(
-          selectedFriend: FriendState.values[friendTabProvider.selectedIndex],
-          badge: 4,
-        ),
-        SizedBox(height: size.height / 50),
-        Expanded(
-          child: IndexedStack(
-            index: friendTabProvider.selectedIndex,
-            children: _pages,
+    return ChangeNotifierProvider(
+      create: (_) => FriendTabProvider(),
+      child: Column(
+        children: [
+          Consumer<FriendTabProvider>(
+            builder: (context, friendTabProvider, child) {
+              return SubTabFriend(
+                selectedFriend:
+                    FriendState.values[friendTabProvider.selectedIndex],
+                badge: 4,
+              );
+            },
           ),
-        ),
-      ],
+          SizedBox(height: size.height / 50),
+          Expanded(
+            child: Consumer<FriendTabProvider>(
+              builder: (context, friendTabProvider, child) {
+                return IndexedStack(
+                  index: friendTabProvider.selectedIndex,
+                  children: _pages,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -26,7 +26,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
   Future<void> updateData() async {
     userProvider = Provider.of<UserProvider>(context, listen: false);
     await userProvider.refreshUser();
-    if (mounted) setState(() {});
+    setState(() {});
   }
 
   @override
@@ -37,14 +37,12 @@ class _PersonalScreenState extends State<PersonalScreen> {
 
   void logout() async {
     await FirebaseAuth.instance.signOut();
-    if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const AuthPage(),
-        ),
-      );
-    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AuthPage(),
+      ),
+    );
   }
 
   @override
@@ -160,7 +158,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                               children: [
                                 // Cột Ngôn ngữ, Thông báo, Phiên bản, Đăng xuất
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: logout,
                                   child: Row(
                                     children: [
                                       SvgPicture.asset(

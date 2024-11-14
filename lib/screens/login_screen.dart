@@ -27,12 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   // giải phóng dữ liệu không cần thiết
-  // @override
-  // void dispose() {
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   // Hàm kiểm tra tính hợp lệ của email
   String? _validateEmail(String email) {
@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
       password: passwordController.text,
     );
 
-    if (mounted) Navigator.pop(context);
+    Navigator.pop(context);
 
     if (result != null) {
       displayMessageToUser(result, context);
