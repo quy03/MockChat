@@ -9,11 +9,13 @@ class BodyMessageDetails extends StatelessWidget {
   final String image;
   final Size size;
 
-  BodyMessageDetails({
+  const BodyMessageDetails({
+    super.key,
     required this.conversationId,
     required this.friendName,
     required this.image,
-    required this.size, required List<MessageContent> messageContent,
+    required this.size,
+    required List<MessageContent> messageContent,
   });
 
   @override

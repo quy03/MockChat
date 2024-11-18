@@ -42,9 +42,9 @@ class _MessageScreenState extends State<MessageScreen> {
               child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
-                text: AppLocalization.of(context)!.translate('Messages'),
+                text: AppLocalization.of(context).translate('Messages'),
                 hintText:
-                    AppLocalization.of(context)!.translate('SearchMessages'),
+                    AppLocalization.of(context).translate('SearchMessages'),
                 push: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -94,7 +94,7 @@ class _MessageScreenState extends State<MessageScreen> {
       children: [
         SizedBox(height: 10),
         Text(
-          AppLocalization.of(context)!.translate('Messages'),
+          AppLocalization.of(context).translate('Messages'),
           style: TextStyle(
             color: Theme.of(context).colorScheme.inversePrimary,
             fontSize: 14,

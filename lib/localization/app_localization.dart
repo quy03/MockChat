@@ -8,8 +8,9 @@ class AppLocalization {
 
   Locale locale;
 
-  static AppLocalization? of(BuildContext context) {
-    return Localizations.of<AppLocalization>(context, AppLocalization);
+  static AppLocalization of(BuildContext context) {
+    return Localizations.of<AppLocalization>(context, AppLocalization) ??
+        AppLocalization(Locale('en'));
   }
 
   static final Map<String, Map<String, String>> _localizedValue = {
@@ -18,7 +19,8 @@ class AppLocalization {
   };
 
   String translate(String key) {
-    return _localizedValue[locale.languageCode]![key] ?? '**$key not foud';
+    return _localizedValue[locale.languageCode]?[key] ??
+        '**$key không tìm thấy**';
   }
 }
 

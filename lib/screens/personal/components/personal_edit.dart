@@ -52,7 +52,7 @@ class _PersonalEditState extends State<PersonalEdit> {
                           ),
                         ),
                         Text(
-                          AppLocalization.of(context)!
+                          AppLocalization.of(context)
                               .translate("ChangeInformation"),
                           style: TextStyle(
                             color: kPrimaryLightColor,
@@ -63,7 +63,7 @@ class _PersonalEditState extends State<PersonalEdit> {
                         GestureDetector(
                           onTap: () {},
                           child: Text(
-                            AppLocalization.of(context)!.translate("Save"),
+                            AppLocalization.of(context).translate("Save"),
                             style: TextStyle(
                               color: kPrimaryLightColor,
                               fontSize: 16,
@@ -138,8 +138,8 @@ class _PersonalEditState extends State<PersonalEdit> {
                       MyTextField(
                         svgIcon: 'assets/icons/user.svg',
                         labelText:
-                            AppLocalization.of(context)!.translate("FullName"),
-                        hintText: AppLocalization.of(context)!
+                            AppLocalization.of(context).translate("FullName"),
+                        hintText: AppLocalization.of(context)
                             .translate("EnterYourFullName"),
                         obscureText: false,
                         controller: fullnameController,
@@ -147,9 +147,9 @@ class _PersonalEditState extends State<PersonalEdit> {
                       SizedBox(height: size.height / 30),
                       MyTextField(
                         svgIcon: 'assets/icons/telephone.svg',
-                        labelText: AppLocalization.of(context)!
+                        labelText: AppLocalization.of(context)
                             .translate('PhoneNumber'),
-                        hintText: AppLocalization.of(context)!
+                        hintText: AppLocalization.of(context)
                             .translate('EnterYourPhoneNumber'),
                         obscureText: false,
                         controller: phonenumberController,
@@ -157,9 +157,9 @@ class _PersonalEditState extends State<PersonalEdit> {
                       SizedBox(height: size.height / 30),
                       MyTextField(
                         svgIcon: 'assets/icons/birthday-cake.svg',
-                        labelText: AppLocalization.of(context)!
+                        labelText: AppLocalization.of(context)
                             .translate('DateOfBirth'),
-                        hintText: AppLocalization.of(context)!
+                        hintText: AppLocalization.of(context)
                             .translate('EnterYourDateOfBirth'),
                         obscureText: false,
                         controller: fullnameController,

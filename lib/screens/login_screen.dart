@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mock_chat/components/my_textfield.dart';
+import 'package:mock_chat/contants.dart';
 import 'package:mock_chat/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,12 +22,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final AuthMethods _authMethods = AuthMethods();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  // text controllers / kiểm soát và quản lý nội dung của trường nhập dữ liệu
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  // giải phóng dữ liệu không cần thiết
   @override
   void dispose() {
     emailController.dispose();
@@ -34,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  // Hàm kiểm tra tính hợp lệ của email
   String? _validateEmail(String email) {
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     if (!emailRegex.hasMatch(email)) {
@@ -43,7 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  // Hàm kiểm tra tính hợp lệ của mật khẩu
   String? _validatePassword(String password) {
     final passwordRegex =
         RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$');
@@ -54,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> loginUser() async {
-    // Kiểm tra tính hợp lệ của email và mật khẩu
     final emailError = _validateEmail(emailController.text);
     final passwordError = _validatePassword(passwordController.text);
 
@@ -80,12 +75,14 @@ class _LoginScreenState extends State<LoginScreen> {
       password: passwordController.text,
     );
 
-    Navigator.pop(context);
+    if (mounted) Navigator.pop(context);
 
     if (result != null) {
       displayMessageToUser(result, context);
     } else {
-      Provider.of<UserProvider>(context, listen: false).refreshUser();
+      if (mounted) {
+        Provider.of<UserProvider>(context, listen: false).refreshUser();
+      }
     }
   }
 
@@ -93,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: kPrimaryLightColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -103,82 +100,15 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: size.height / 12),
-                      // Logo Login
-                      Image.asset(
-                        "assets/images/logo_login.png",
-                        height: 124,
-                        width: 124,
-                      ),
-
-                      // Text app name
-                      Text(
-                        AppLocalization.of(context)!.translate('Experience'),
-                        style: TextStyle(fontSize: 26),
-                      ),
-                      // Text đăng nhập
-                      Text(
-                        AppLocalization.of(context)!.translate('Login'),
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: size.height / 60),
-
-                      // email textfield
-                      MyTextField(
-                        svgIcon: 'assets/icons/mail.svg',
-                        labelText: 'EMAIL',
-                        hintText: AppLocalization.of(context)!
-                            .translate('EnterYourEmail'),
-                        obscureText: false,
-                        controller: emailController,
-                      ),
-                      SizedBox(height: size.height / 30),
-
-                      // password textfield
-                      MyTextField(
-                        svgIcon: 'assets/icons/key.svg',
-                        labelText:
-                            AppLocalization.of(context)!.translate('Password'),
-                        hintText: AppLocalization.of(context)!
-                            .translate('EnterYourPassword'),
-                        obscureText: true,
-                        controller: passwordController,
-                      ),
-                      SizedBox(height: size.height / 50),
-
-                      // forgot password
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            AppLocalization.of(context)!
-                                .translate('ForgotYourPassword'),
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: LoginForm(
+                    emailController: emailController,
+                    passwordController: passwordController,
+                    onLogin: loginUser,
                   ),
                 ),
                 Expanded(
-                  flex: 1,
                   child: Column(
                     children: [
-                      // nút đăng nhập
-                      MyButton(
-                        text: AppLocalization.of(context)!.translate('Login'),
-                        onTap: loginUser,
-                      ),
                       SizedBox(height: size.height / 10),
 
                       // Chưa có tài khoản? Đăng ký
@@ -186,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppLocalization.of(context)!
+                            AppLocalization.of(context)
                                 .translate('DoNotHaveAnAccount'),
                             style:
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
@@ -194,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           GestureDetector(
                             onTap: widget.onSwitch,
                             child: Text(
-                              AppLocalization.of(context)!
+                              AppLocalization.of(context)
                                   .translate('SignUpNow'),
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
@@ -212,6 +142,99 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class LoginForm extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final VoidCallback onLogin;
+
+  const LoginForm({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+    required this.onLogin,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: size.height / 12),
+
+        // Logo
+        Image.asset(
+          "assets/images/logo_login.png",
+          height: 124,
+          width: 124,
+        ),
+
+        // Tên ứng dụng
+        Text(
+          AppLocalization.of(context).translate('Experience'),
+          style: TextStyle(fontSize: 26),
+        ),
+
+        // Tiêu đề đăng nhập
+        Text(
+          AppLocalization.of(context).translate('Login'),
+          style: TextStyle(
+            color: kSecondaryColor,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        SizedBox(height: size.height / 60),
+
+        // Trường nhập email
+        MyTextField(
+          svgIcon: 'assets/icons/mail.svg',
+          labelText: 'EMAIL',
+          hintText: AppLocalization.of(context).translate('EnterYourEmail'),
+          obscureText: false,
+          controller: emailController,
+        ),
+
+        SizedBox(height: size.height / 30),
+
+        // Trường nhập mật khẩu
+        MyTextField(
+          svgIcon: 'assets/icons/key.svg',
+          labelText: AppLocalization.of(context).translate('Password'),
+          hintText: AppLocalization.of(context).translate('EnterYourPassword'),
+          obscureText: true,
+          controller: passwordController,
+        ),
+
+        SizedBox(height: size.height / 50),
+
+        // Quên mật khẩu
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              AppLocalization.of(context).translate('ForgotYourPassword'),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: size.height / 20),
+
+        // Nút đăng nhập
+        MyButton(
+          text: AppLocalization.of(context).translate('Login'),
+          onTap: onLogin,
+        ),
+      ],
     );
   }
 }

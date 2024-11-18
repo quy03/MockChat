@@ -35,7 +35,7 @@ class SubTabFriend extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    AppLocalization.of(context)!.translate('Friends'),
+                    AppLocalization.of(context).translate('Friends'),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedFriend == FriendState.friends
@@ -55,7 +55,7 @@ class SubTabFriend extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    AppLocalization.of(context)!.translate('All'),
+                    AppLocalization.of(context).translate('All'),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedFriend == FriendState.all
@@ -77,7 +77,7 @@ class SubTabFriend extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        AppLocalization.of(context)!.translate('Requests'),
+                        AppLocalization.of(context).translate('Requests'),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: selectedFriend == FriendState.request

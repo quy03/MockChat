@@ -77,7 +77,7 @@ class _MySearchState extends State<MySearch> {
               FocusScope.of(context).unfocus();
             },
             child: Text(
-              AppLocalization.of(context)!.translate('Cancel'),
+              AppLocalization.of(context).translate('Cancel'),
               style: TextStyle(
                 color: Theme.of(context).colorScheme.surface,
                 fontSize: 16,

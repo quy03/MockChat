@@ -28,7 +28,7 @@ class ImformationSection extends StatelessWidget {
           _buildRow(
             context,
             iconPath: "assets/icons/global.svg",
-            label: AppLocalization.of(context)!.translate('Language'),
+            label: AppLocalization.of(context).translate('Language'),
             trailingWidget: Consumer<CurrentData>(
               builder: (BuildContext context, CurrentData currentData,
                   Widget? child) {
@@ -66,7 +66,7 @@ class ImformationSection extends StatelessWidget {
           _buildRow(
             context,
             iconPath: "assets/icons/megaphone.svg",
-            label: AppLocalization.of(context)!.translate('Notifications'),
+            label: AppLocalization.of(context).translate('Notifications'),
             trailingWidget: SvgPicture.asset("assets/icons/right arrow.svg"),
           ),
           Divider(color: Color.fromRGBO(239, 238, 238, 1)),
@@ -75,7 +75,7 @@ class ImformationSection extends StatelessWidget {
           _buildRow(
             context,
             iconPath: "assets/icons/reuse.svg",
-            label: AppLocalization.of(context)!.translate('Version'),
+            label: AppLocalization.of(context).translate('Version'),
             trailingWidget: Text(
               "1.0.0",
               style: const TextStyle(

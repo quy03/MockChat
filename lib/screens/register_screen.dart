@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mock_chat/contants.dart';
 import '../auth/auth_methods.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
@@ -29,13 +30,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordController = TextEditingController();
 
   // giải phóng dữ liệu không cần thiết
-  @override
-  void dispose() {
-    fullnameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   fullnameController.dispose();
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
 
   // Hàm kiểm tra tính hợp lệ của email
   String? _validateEmail(String email) {
@@ -99,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: kPrimaryLightColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -124,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(height: size.height / 20),
                       // text đăng ký
                       Text(
-                        AppLocalization.of(context)!.translate('SignUp'),
+                        AppLocalization.of(context).translate('SignUp'),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 32,
@@ -136,8 +137,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       MyTextField(
                         svgIcon: 'assets/icons/user.svg',
                         labelText:
-                            AppLocalization.of(context)!.translate('FullName'),
-                        hintText: AppLocalization.of(context)!
+                            AppLocalization.of(context).translate('FullName'),
+                        hintText: AppLocalization.of(context)
                             .translate('EnterYourFullName'),
                         obscureText: false,
                         controller: fullnameController,
@@ -148,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       MyTextField(
                         svgIcon: 'assets/icons/mail.svg',
                         labelText: 'EMAIL',
-                        hintText: AppLocalization.of(context)!
+                        hintText: AppLocalization.of(context)
                             .translate('EnterYourEmail'),
                         obscureText: false,
                         controller: emailController,
@@ -159,8 +160,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       MyTextField(
                         svgIcon: 'assets/icons/key.svg',
                         labelText:
-                            AppLocalization.of(context)!.translate('Password'),
-                        hintText: AppLocalization.of(context)!
+                            AppLocalization.of(context).translate('Password'),
+                        hintText: AppLocalization.of(context)
                             .translate('EnterYourPassword'),
                         obscureText: true,
                         controller: passwordController,
@@ -208,13 +209,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               children: [
                                 TextSpan(
                                   text:
-                                      "${AppLocalization.of(context)!.translate('IagreeToThe')} ",
+                                      "${AppLocalization.of(context).translate('IagreeToThe')} ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
                                 TextSpan(
                                   text:
-                                      "${AppLocalization.of(context)!.translate('Policies')} ",
+                                      "${AppLocalization.of(context).translate('Policies')} ",
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.secondary,
@@ -223,12 +224,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 TextSpan(
                                   text:
-                                      "${AppLocalization.of(context)!.translate('And')} ",
+                                      "${AppLocalization.of(context).translate('And')} ",
                                   style: TextStyle(
                                       color: Color.fromRGBO(57, 57, 57, 1)),
                                 ),
                                 TextSpan(
-                                  text: AppLocalization.of(context)!
+                                  text: AppLocalization.of(context)
                                       .translate('Terms'),
                                   style: TextStyle(
                                     color:
@@ -241,17 +242,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: size.height / 20),
+
+                      // nút đăng ký
+                      MyButton(
+                        text: AppLocalization.of(context).translate('SignUp'),
+                        onTap: registerUser,
+                      ),
                     ],
                   ),
                 ),
                 Expanded(
                   child: Column(
                     children: [
-                      // nút đăng ký
-                      MyButton(
-                        text: AppLocalization.of(context)!.translate('SignUp'),
-                        onTap: registerUser,
-                      ),
                       SizedBox(height: size.height / 10),
 
                       // Đã có tài khoản? Đăng nhập ngay
@@ -259,7 +262,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppLocalization.of(context)!
+                            AppLocalization.of(context)
                                 .translate('AlreadyHaveAnAccount'),
                             style:
                                 TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
@@ -267,7 +270,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           GestureDetector(
                             onTap: widget.onSwitch,
                             child: Text(
-                              AppLocalization.of(context)!
+                              AppLocalization.of(context)
                                   .translate('SignInNow'),
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,

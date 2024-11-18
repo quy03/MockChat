@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mock_chat/auth/auth_page.dart';
-import 'package:mock_chat/provider/color_provider.dart';
-import 'package:mock_chat/provider/tab_provider.dart';
+import 'package:mock_chat/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 import 'localization/app_localization.dart';
 import 'provider/current_data.dart';
-import 'provider/user_provider.dart';
 import 'theme/theme.dart';
 
 Future<void> main() async {
@@ -23,10 +21,8 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<ColorProvider>(create: (_) => ColorProvider()),
-        ChangeNotifierProvider<TabProvider>(create: (_) => TabProvider()),
-        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ChangeNotifierProvider<CurrentData>(create: (_) => CurrentData()),
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
       ],
       child: MyApp(),
     ),

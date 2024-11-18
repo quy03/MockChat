@@ -58,7 +58,7 @@ class CreateNewMessage extends StatelessWidget {
           height: 20,
         ),
         Text(
-          AppLocalization.of(context)!.translate('FriendsList'),
+          AppLocalization.of(context).translate('FriendsList'),
           style: const TextStyle(
             color: Color.fromRGBO(153, 153, 153, 1),
             fontSize: 14,

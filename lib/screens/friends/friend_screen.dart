@@ -40,9 +40,9 @@ class _FriendScreenState extends State<FriendScreen> {
               child: PrimaryScreenAppbar(
                 size: size,
                 onSearchToggle: _toggleSearch,
-                text: AppLocalization.of(context)!.translate('Friends'),
+                text: AppLocalization.of(context).translate('Friends'),
                 hintText:
-                    AppLocalization.of(context)!.translate('SearchFriends'),
+                    AppLocalization.of(context).translate('SearchFriends'),
                 push: GestureDetector(
                   onTap: () {
                     // Navigator.push(
@@ -88,7 +88,7 @@ class _FriendScreenState extends State<FriendScreen> {
         Padding(
           padding: EdgeInsets.only(left: size.width / 30),
           child: Text(
-            AppLocalization.of(context)!.translate('Friends'),
+            AppLocalization.of(context).translate('Friends'),
             style: TextStyle(
               color: kInversePrimaryColor,
               fontSize: 14,

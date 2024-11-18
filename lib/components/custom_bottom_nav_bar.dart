@@ -76,7 +76,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 ],
               ),
               Text(
-                AppLocalization.of(context)!.translate('Messages'),
+                AppLocalization.of(context).translate('Messages'),
                 style: TextStyle(
                   color: MenuState.message == selectedMenu
                       ? iconColorProvider.selectedColor
@@ -104,7 +104,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 28,
               ),
               Text(
-                AppLocalization.of(context)!.translate('Friends'),
+                AppLocalization.of(context).translate('Friends'),
                 style: TextStyle(
                   color: MenuState.friend == selectedMenu
                       ? iconColorProvider.selectedColor
@@ -132,7 +132,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 28,
               ),
               Text(
-                AppLocalization.of(context)!.translate('Profile'),
+                AppLocalization.of(context).translate('Profile'),
                 style: TextStyle(
                   color: MenuState.personal == selectedMenu
                       ? iconColorProvider.selectedColor

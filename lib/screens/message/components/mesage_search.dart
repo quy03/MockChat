@@ -43,7 +43,7 @@ class MessageSearch extends StatelessWidget {
                     style: styleBody,
                   ),
                   Text(
-                    AppLocalization.of(context)!.translate('MatchingMessages'),
+                    AppLocalization.of(context).translate('MatchingMessages'),
                     style: TextStyle(
                       color: Colors.grey,
                       // 0,0,0,1       153,153,153,1

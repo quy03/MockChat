@@ -165,7 +165,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                                           "assets/icons/logout.svg"),
                                       const SizedBox(width: 20),
                                       Text(
-                                        AppLocalization.of(context)!
+                                        AppLocalization.of(context)
                                             .translate('LogOut'),
                                         style: const TextStyle(
                                           fontSize: 18,

@@ -36,7 +36,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
                 ),
               ),
               Text(
-                AppLocalization.of(context)!.translate('CreateMessage'),
+                AppLocalization.of(context).translate('CreateMessage'),
                 style: TextStyle(
                   color: kPrimaryLightColor,
                   fontSize: 18,
@@ -45,7 +45,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Text(
-                  AppLocalization.of(context)!.translate('Cancel'),
+                  AppLocalization.of(context).translate('Cancel'),
                   style: TextStyle(
                     color: kPrimaryLightColor,
                     fontSize: 16,
@@ -58,8 +58,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
           GestureDetector(
             onTap: () => {},
             child: MySearch(
-              hintText:
-                  AppLocalization.of(context)!.translate('SearchMessages'),
+              hintText: AppLocalization.of(context).translate('SearchMessages'),
               onSearchToggleMySearch: (value) => {},
             ),
           ),
