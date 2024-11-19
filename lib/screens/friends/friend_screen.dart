@@ -4,7 +4,7 @@ import 'package:mock_chat/contants.dart';
 import 'package:mock_chat/localization/app_localization.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/friends/components/body_friend.dart';
-import 'package:mock_chat/screens/friends/components/friend_search.dart';
+import 'package:mock_chat/screens/friends/components/friend_search_screen.dart';
 
 import '../../components/primary_screen_appbar.dart';
 
@@ -100,7 +100,7 @@ class _FriendScreenState extends State<FriendScreen> {
             itemCount: demoMessage.length,
             itemBuilder: (context, index) {
               final friend = demoMessage[index];
-              return FriendSearch(
+              return FriendSearchScreen(
                 size: size,
                 image: friend.image,
                 friendName: friend.friendName,

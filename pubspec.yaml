@@ -25,6 +25,8 @@ dependencies:
   diacritic: ^0.1.6
   easy_localization: ^3.0.7
   provider: ^6.1.2
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
 
 
 dev_dependencies:

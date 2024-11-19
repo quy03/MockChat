@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mock_chat/screens/login_screen.dart';
-import 'package:mock_chat/screens/register_screen.dart';
+import 'package:mock_chat/screens/login/login_screen.dart';
+import 'package:mock_chat/screens/register/register_screen.dart';
 
 class LoginOrRegister extends StatefulWidget {
   const LoginOrRegister({super.key});

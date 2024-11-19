@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mock_chat/contants.dart';
-import '../auth/auth_methods.dart';
-import '../components/my_button.dart';
-import '../components/my_textfield.dart';
-import '../helper/helper_fuction.dart';
-import '../localization/app_localization.dart';
+import '../../auth/auth_methods.dart';
+import '../../components/my_button.dart';
+import '../../components/my_textfield.dart';
+import '../../helper/helper_fuction.dart';
+import '../../localization/app_localization.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback onSwitch;

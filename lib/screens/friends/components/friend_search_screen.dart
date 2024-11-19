@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FriendSearch extends StatelessWidget {
-  const FriendSearch({
+class FriendSearchScreen extends StatelessWidget {
+  const FriendSearchScreen({
     super.key,
     required this.size,
     required this.image,
