@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mock_chat/bloc/Auth/login_bloc.dart';
-import 'package:mock_chat/bloc/Auth/login_event.dart';
-import 'package:mock_chat/bloc/Auth/login_state.dart';
+import 'package:mock_chat/bloc/login/login_bloc.dart';
+import 'package:mock_chat/bloc/login/login_event.dart';
+import 'package:mock_chat/bloc/login/login_state.dart';
 import 'package:mock_chat/components/my_button.dart';
 import 'package:mock_chat/components/my_textfield.dart';
 import 'package:mock_chat/contants.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mock_chat/auth/auth_methods.dart';
-import 'package:mock_chat/bloc/Auth/login_event.dart';
-import 'package:mock_chat/bloc/Auth/login_state.dart';
+import 'package:mock_chat/bloc/login/login_event.dart';
+import 'package:mock_chat/bloc/login/login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthMethods _authMethods = AuthMethods();
@@ -45,7 +45,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       return;
     }
 
-    // Gọi API đăng nhập
     try {
       String? result = await _authMethods.loginUser(
         email: state.email,

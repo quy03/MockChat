@@ -9,6 +9,7 @@ import '../../localization/app_localization.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback onSwitch;
+
   const RegisterScreen({
     super.key,
     required this.onSwitch,
@@ -20,49 +21,54 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final AuthMethods _authMethods = AuthMethods();
-  // kiểm tra nút checkbox
+
   bool _isChecked = false;
-  String? checkBox;
+  String? _checkboxError;
 
-  // text controllers / kiểm soát và quản lý nội dung của trường nhập dữ liệu
-  TextEditingController fullnameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController fullnameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  // giải phóng dữ liệu không cần thiết
-  // @override
-  // void dispose() {
-  //   fullnameController.dispose();
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    fullnameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
-  // Hàm kiểm tra tính hợp lệ của email
   String? _validateEmail(String email) {
-    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
     if (!emailRegex.hasMatch(email)) {
-      return 'Email không hợp lệ';
+      return AppLocalization.of(context).translate('InvalidEmail');
     }
     return null;
   }
 
-  // Hàm kiểm tra tính hợp lệ của mật khẩu
   String? _validatePassword(String password) {
     final passwordRegex =
         RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$');
     if (!passwordRegex.hasMatch(password)) {
-      return 'Mật khẩu phải có ít nhất 8 ký tự, 1 chữ cái thường, 1 chữ hoa và 1 số';
+      return AppLocalization.of(context).translate('InvalidPassword');
     }
     return null;
   }
 
   Future<void> registerUser() async {
+    setState(() {
+      _checkboxError = _isChecked
+          ? null
+          : AppLocalization.of(context).translate('AgreeTermsError');
+    });
+
     final emailError = _validateEmail(emailController.text);
     final passwordError = _validatePassword(passwordController.text);
 
     if (fullnameController.text.isEmpty) {
-      displayMessageToUser("Vui lòng nhập tên đầy đủ", context);
+      displayMessageToUser(
+        AppLocalization.of(context).translate('EnterFullName'),
+        context,
+      );
       return;
     }
 
@@ -76,11 +82,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    if (!_isChecked) {
-      setState(() {
-        checkBox = "Bạn phải đồng ý với chính sách và điều khoản";
-      });
-      displayMessageToUser(checkBox!, context);
+    if (_checkboxError != null) {
+      displayMessageToUser(_checkboxError!, context);
       return;
     }
 
@@ -110,162 +113,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: size.height / 20),
-                      GestureDetector(
-                        onTap: widget.onSwitch,
-                        child: SvgPicture.asset(
-                          "assets/icons/backward-arrow.svg",
-                          height: 24,
-                          width: 24,
-                        ),
-                      ),
-                      SizedBox(height: size.height / 20),
-                      // text đăng ký
-                      Text(
-                        AppLocalization.of(context).translate('SignUp'),
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: size.height / 20),
-                      // fullname textfield
-                      MyTextField(
-                        svgIcon: 'assets/icons/user.svg',
-                        labelText:
-                            AppLocalization.of(context).translate('FullName'),
-                        hintText: AppLocalization.of(context)
-                            .translate('EnterYourFullName'),
-                        obscureText: false,
-                        controller: fullnameController,
-                      ),
-                      SizedBox(height: size.height / 30),
-
-                      // email textfield
-                      MyTextField(
-                        svgIcon: 'assets/icons/mail.svg',
-                        labelText: 'EMAIL',
-                        hintText: AppLocalization.of(context)
-                            .translate('EnterYourEmail'),
-                        obscureText: false,
-                        controller: emailController,
-                      ),
-                      SizedBox(height: size.height / 30),
-
-                      // password textfield
-                      MyTextField(
-                        svgIcon: 'assets/icons/key.svg',
-                        labelText:
-                            AppLocalization.of(context).translate('Password'),
-                        hintText: AppLocalization.of(context)
-                            .translate('EnterYourPassword'),
-                        obscureText: true,
-                        controller: passwordController,
-                      ),
-
-                      SizedBox(height: size.height / 30),
-
-                      // Checkbox đồng ý chính sách
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _isChecked = !_isChecked;
-                                checkBox = null;
-                              });
-                            },
-                            child: Container(
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: _isChecked
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Colors.grey,
-                                  width: 2,
-                                ),
-                                color: _isChecked
-                                    ? Theme.of(context).colorScheme.secondary
-                                    : Colors.transparent,
-                              ),
-                              child: _isChecked
-                                  ? const Icon(
-                                      Icons.check,
-                                      size: 16,
-                                      color: Colors.white,
-                                    )
-                                  : null,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text:
-                                      "${AppLocalization.of(context).translate('IagreeToThe')} ",
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(57, 57, 57, 1)),
-                                ),
-                                TextSpan(
-                                  text:
-                                      "${AppLocalization.of(context).translate('Policies')} ",
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text:
-                                      "${AppLocalization.of(context).translate('And')} ",
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(57, 57, 57, 1)),
-                                ),
-                                TextSpan(
-                                  text: AppLocalization.of(context)
-                                      .translate('Terms'),
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: size.height / 20),
-
-                      // nút đăng ký
-                      MyButton(
-                        text: AppLocalization.of(context).translate('SignUp'),
-                        onTap: registerUser,
-                      ),
-                    ],
+                  child: RegisterForm(
+                    fullnameController: fullnameController,
+                    emailController: emailController,
+                    passwordController: passwordController,
+                    isChecked: _isChecked,
+                    checkboxError: _checkboxError,
+                    toggleCheckbox: () {
+                      setState(() {
+                        _isChecked = !_isChecked;
+                        _checkboxError = null;
+                      });
+                    },
+                    registerUser: registerUser,
+                    onSwitch: widget.onSwitch,
                   ),
                 ),
                 Expanded(
                   child: Column(
                     children: [
                       SizedBox(height: size.height / 10),
-
-                      // Đã có tài khoản? Đăng nhập ngay
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             AppLocalization.of(context)
                                 .translate('AlreadyHaveAnAccount'),
-                            style:
-                                TextStyle(color: Color.fromRGBO(57, 57, 57, 1)),
+                            style: TextStyle(color: const Color(0xFF393939)),
                           ),
                           GestureDetector(
                             onTap: widget.onSwitch,
@@ -273,7 +147,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               AppLocalization.of(context)
                                   .translate('SignInNow'),
                               style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary,
+                                color: kSecondaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -288,6 +162,159 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class RegisterForm extends StatelessWidget {
+  final TextEditingController fullnameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final bool isChecked;
+  final String? checkboxError;
+  final VoidCallback toggleCheckbox;
+  final VoidCallback registerUser;
+  final VoidCallback onSwitch;
+
+  const RegisterForm({
+    super.key,
+    required this.fullnameController,
+    required this.emailController,
+    required this.passwordController,
+    required this.isChecked,
+    required this.checkboxError,
+    required this.toggleCheckbox,
+    required this.registerUser,
+    required this.onSwitch,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: size.height / 20),
+        GestureDetector(
+          onTap: onSwitch,
+          child: SvgPicture.asset(
+            "assets/icons/backward-arrow.svg",
+            height: 24,
+            width: 24,
+          ),
+        ),
+        SizedBox(height: size.height / 20),
+        Text(
+          AppLocalization.of(context).translate('SignUp'),
+          style: TextStyle(
+            color: kSecondaryColor,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: size.height / 30),
+        MyTextField(
+          svgIcon: 'assets/icons/user.svg',
+          labelText: AppLocalization.of(context).translate('FullName'),
+          hintText: AppLocalization.of(context).translate('EnterYourFullName'),
+          obscureText: false,
+          controller: fullnameController,
+        ),
+        SizedBox(height: size.height / 30),
+        MyTextField(
+          svgIcon: 'assets/icons/mail.svg',
+          labelText: 'EMAIL',
+          hintText: AppLocalization.of(context).translate('EnterYourEmail'),
+          obscureText: false,
+          controller: emailController,
+        ),
+        SizedBox(height: size.height / 30),
+        MyTextField(
+          svgIcon: 'assets/icons/key.svg',
+          labelText: AppLocalization.of(context).translate('Password'),
+          hintText: AppLocalization.of(context).translate('EnterYourPassword'),
+          obscureText: true,
+          controller: passwordController,
+        ),
+        SizedBox(height: size.height / 30),
+        Row(
+          children: [
+            GestureDetector(
+              onTap: toggleCheckbox,
+              child: Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: isChecked
+                        ? Theme.of(context).colorScheme.secondary
+                        : Colors.grey,
+                    width: 2,
+                  ),
+                  color: isChecked
+                      ? Theme.of(context).colorScheme.secondary
+                      : Colors.transparent,
+                ),
+                child: isChecked
+                    ? const Icon(
+                        Icons.check,
+                        size: 16,
+                        color: Colors.white,
+                      )
+                    : null,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text:
+                          "${AppLocalization.of(context).translate('IagreeToThe')} ",
+                      style: const TextStyle(color: Color(0xFF393939)),
+                    ),
+                    TextSpan(
+                      text:
+                          "${AppLocalization.of(context).translate('Policies')} ",
+                      style: TextStyle(
+                        color: kSecondaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "${AppLocalization.of(context).translate('And')} ",
+                      style: const TextStyle(color: Color(0xFF393939)),
+                    ),
+                    TextSpan(
+                      text: AppLocalization.of(context).translate('Terms'),
+                      style: TextStyle(
+                        color: kSecondaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        if (checkboxError != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              checkboxError!,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+        SizedBox(height: size.height / 20),
+        MyButton(
+          text: AppLocalization.of(context).translate('SignUp'),
+          onTap: registerUser,
+        ),
+      ],
     );
   }
 }
