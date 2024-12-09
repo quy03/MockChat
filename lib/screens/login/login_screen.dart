@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatefulWidget {
   final Function onSwitch;
 
-  const LoginScreen({super.key, required this.onSwitch});
+  const LoginScreen({super.key, required this.onSwitch,});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -29,14 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     _loginBloc = LoginBloc();
-  }
-
-  @override
-  void dispose() {
-    _loginBloc.close();
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
   }
 
   @override
