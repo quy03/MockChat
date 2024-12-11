@@ -100,10 +100,11 @@ class LoginForm extends StatelessWidget {
             }
 
             return MyButton(
-                text: AppLocalization.of(context).translate('Login'),
-                onTap: () {
-                  context.read<LoginBloc>().add(LoginSubmitted());
-                });
+              text: AppLocalization.of(context).translate('Login'),
+              onTap: () {
+                context.read<LoginBloc>().add(LoginSubmitted());
+              },
+            );
           },
         ),
       ],
