@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mock_chat/localization/app_localization.dart';
 import 'package:mock_chat/models/message.dart';
 import 'package:mock_chat/screens/message/components/appbar_message.dart';
 import 'package:mock_chat/screens/message/components/create_new_message.dart';
-import 'package:mock_chat/screens/message/components/message_details.dart';
-import 'package:mock_chat/screens/message/components/message_list.dart';
+import 'package:mock_chat/screens/message/components/mesage_search.dart';
 
-import '../../localization/app_localization.dart';
-
-class MessageScreen extends StatefulWidget {
-  const MessageScreen({super.key});
+class MessageSearchScreen extends StatefulWidget {
+  const MessageSearchScreen({super.key});
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState();
+  State<MessageSearchScreen> createState() => _MessageSearchScreenState();
 }
 
-class _MessageScreenState extends State<MessageScreen> {
+class _MessageSearchScreenState extends State<MessageSearchScreen> {
   bool _isSearching = false;
 
   // Hàm để chuyển đổi trạng thái tìm kiếm
@@ -74,7 +72,7 @@ class _MessageScreenState extends State<MessageScreen> {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: _buildMessageList(size),
+                  child: _buildSearchMessageList(size),
                 ),
               ),
             ),
@@ -85,36 +83,19 @@ class _MessageScreenState extends State<MessageScreen> {
   }
 
   // Hiển thị danh sách tin nhắn
-  Column _buildMessageList(Size size) {
+  Column _buildSearchMessageList(Size size) {
     return Column(
       children: [
         // SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
             itemCount: demoMessage.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (context, index) {
               final message = demoMessage[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MessageDetail(
-                        friendName: message.friendName,
-                        messageContent: message.messageContent,
-                        image: message.image,
-                      ),
-                    ),
-                  );
-                },
-                child: MessageList(
-                  size: size,
-                  image: message.image,
-                  friendName: message.friendName,
-                  messageContent: message.messageContent,
-                  story: message.story,
-                  badge: message.badge,
-                ),
+              return MessageSearch(
+                size: size,
+                image: message.image,
+                friendName: message.friendName,
               );
             },
           ),

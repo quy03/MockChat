@@ -60,6 +60,7 @@ class SecondaryScreenAppbar extends StatelessWidget {
             child: MySearch(
               hintText: AppLocalization.of(context).translate('SearchMessages'),
               onSearchToggleMySearch: (value) => {},
+              onNavigate: () {},
             ),
           ),
         ],

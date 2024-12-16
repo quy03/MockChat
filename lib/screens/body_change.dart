@@ -27,7 +27,6 @@ class _BodyChangeState extends State<BodyChange> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.blue,
@@ -49,29 +48,26 @@ class _BodyChangeState extends State<BodyChange> {
                 index: tabProvider.selectedIndex,
                 children: _pages,
               ),
-              bottomNavigationBar: isKeyboardVisible
-                  ? const SizedBox.shrink() // Ẩn TabBar khi bàn phím hiển thị
-                  : Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: size.height / 60,
-                        horizontal: size.width / 30,
-                      ),
-                      color: const Color.fromRGBO(246, 246, 246, 1),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: size.height / 60,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Theme.of(context).colorScheme.surface,
-                        ),
-                        child: CustomBottomNavBar(
-                          selectedMenu:
-                              MenuState.values[tabProvider.selectedIndex],
-                          messageBadgeCount: 4,
-                        ),
-                      ),
-                    ),
+              bottomNavigationBar: Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: size.height / 60,
+                  horizontal: size.width / 30,
+                ),
+                color: const Color.fromRGBO(246, 246, 246, 1),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: size.height / 60,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                  child: CustomBottomNavBar(
+                    selectedMenu: MenuState.values[tabProvider.selectedIndex],
+                    messageBadgeCount: 4,
+                  ),
+                ),
+              ),
             );
           },
         ),

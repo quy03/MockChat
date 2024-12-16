@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mock_chat/contants.dart';
 
-import '../localization/app_localization.dart';
-
 class MySearch extends StatefulWidget {
-  // ignore: use_super_parameters
   const MySearch({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.onSearchToggleMySearch,
-  }) : super(key: key);
+    required this.onNavigate,
+  });
 
   final String hintText;
   final ValueChanged<bool> onSearchToggleMySearch;
+  final VoidCallback onNavigate;
 
   @override
   State<MySearch> createState() => _MySearchState();
 }
 
 class _MySearchState extends State<MySearch> {
-  bool _isSearching = false;
   TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Row(
       children: [
         Expanded(
@@ -43,24 +40,19 @@ class _MySearchState extends State<MySearch> {
                   onPressed: () {},
                 ),
                 Expanded(
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: _isSearching ? size.width * 0.7 : size.width,
-                    child: TextField(
-                      onTap: () {
-                        _isSearching = true;
+                  child: TextField(
+                    onTap: () {
+                      setState(() {
                         widget.onSearchToggleMySearch(true);
-                      },
-                      controller: searchController,
-                      decoration: InputDecoration(
-                        filled: true,
-                        hintText: widget.hintText,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                      ),
+                        // Ngăn không cho bàn phím xuất hiện
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      });
+                      widget.onNavigate();
+                    },
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      hintText: widget.hintText,
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
@@ -68,22 +60,6 @@ class _MySearchState extends State<MySearch> {
             ),
           ),
         ),
-        if (_isSearching)
-          TextButton(
-            onPressed: () {
-              _isSearching = false;
-              widget.onSearchToggleMySearch(false);
-              searchController.clear();
-              FocusScope.of(context).unfocus();
-            },
-            child: Text(
-              AppLocalization.of(context).translate('Cancel'),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.surface,
-                fontSize: 16,
-              ),
-            ),
-          ),
       ],
     );
   }

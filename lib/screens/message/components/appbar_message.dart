@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mock_chat/contants.dart';
+import 'package:mock_chat/screens/message/components/message_search_screen.dart';
 
 import '../../../components/my_search.dart';
-import '../contants.dart';
 
-class PrimaryScreenAppbar extends StatelessWidget {
-  const PrimaryScreenAppbar({
+class AppbarMessage extends StatelessWidget {
+  const AppbarMessage({
     super.key,
     required this.size,
     required this.onSearchToggle,
@@ -44,11 +45,18 @@ class PrimaryScreenAppbar extends StatelessWidget {
           ),
           SizedBox(height: 20),
           GestureDetector(
-            onTap: () => {},
+            onTap: () {},
             child: MySearch(
               hintText: hintText,
               onSearchToggleMySearch: onSearchToggle,
-              onNavigate: () {},
+              onNavigate: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MessageSearchScreen(),
+                  ),
+                );
+              },
             ),
           ),
         ],
